@@ -1,0 +1,24 @@
+{
+  "name": "vapor-editor",
+  "version": "1.0.0",
+  "description": "Ethereum blockchain editor",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "test": "test",
+    "lint": "eslint **/*.js"
+  },
+  "keywords": [
+    "Ethereum",
+    "Editor",
+    "IDE",
+    "Dev",
+    "Develop"
+  ],
+  "author": "Shawn Choleva",
+  "license": "MIT",
+  "devDependencies": {
+    "electron": "^1.7.9",
+    "eslint": "^4.13.1"
+  }
+}
