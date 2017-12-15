@@ -1,1 +1,1 @@
-# VaporEditor
+# EtherealEditor
