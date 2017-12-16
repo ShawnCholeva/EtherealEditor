@@ -1,5 +1,7 @@
-Ethereal Editor - Electron editor for development on the Ethereum Blockchain
+Ethereal Editor
 =
+Electron editor for development on the Ethereum Blockchain
+-
 
 Getting Started
 -
