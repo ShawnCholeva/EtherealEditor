@@ -29,6 +29,7 @@ const commonConfig = {
   node: {
     __dirname: false
   },
+  watch: true
 }
 
 module.exports = [
