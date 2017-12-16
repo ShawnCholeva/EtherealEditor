@@ -18,7 +18,11 @@
     "Editor",
     "IDE",
     "Dev",
-    "Develop"
+    "Develop",
+    "React",
+    "Webpack",
+    "Typescript",
+    "Jest"
   ],
   "author": "Shawn Choleva",
   "license": "MIT",
