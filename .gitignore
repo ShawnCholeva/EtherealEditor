@@ -5,6 +5,9 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
+#XML
+TEST-jest_junit.xml
+
 # Runtime data
 pids
 *.pid
@@ -33,6 +36,7 @@ bower_components
 build/Release
 release-builds
 dist
+__tests__
 
 # Dependency directories
 node_modules/
