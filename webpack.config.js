@@ -1,101 +1,48 @@
-const path = require('path');
+const path = require('path')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
 
-module.exports = {
-  devtool: 'cheap-module-source-map',
-  context: path.resolve(__dirname, 'src'),
-  entry: path.join(__dirname, 'src', 'index.js'),
+const commonConfig = {
   output: {
     path: path.resolve(__dirname, 'dist'),
-    publicPath: '/dist/',
-    filename: 'app.min.js',
-  },
-  resolve: {
-    modules: [path.resolve(__dirname), 'node_modules'],
+    filename: '[name].js'
   },
   module: {
     rules: [
       {
-        test: /\.css$/,
-        use: [
-          'style-loader',
-          {
-            loader: 'css-loader',
-            options: {
-              modules: true,
-            },
-          },
-        ],
-        exclude: /node_modules/,
-      },
-      {
-        test: /node_modules\/.+\.css$/,
-        use: ['style-loader', 'css-loader'],
-      },
-      {
-        test: /\.js$/,
-        exclude: /node_modules/,
-        loader: 'babel-loader',
+        test: /\.ts$/,
+        enforce: 'pre',
+        loader: 'tslint-loader',
         options: {
-          cacheDirectory: true,
-          presets: ['env', 'react', 'stage-0'],
-          plugins: ['transform-runtime'],
-          env: {
-            development: {
-              presets: ['react-hmre'],
-            },
-            production: {
-              presets: ['react-optimize'],
-            },
-          },
-        },
+          typeCheck: true,
+          emitErrors: true
+        }
       },
       {
-        test: /\.woff\d?(\?.+)?$/,
-        loader: 'url-loader',
-        options: {
-          limit: 10000,
-          mimetype: 'application/font-woff',
-        },
-      },
-      {
-        test: /\.ttf(\?.+)?$/,
-        loader: 'url-loader',
-        options: {
-          limit: 10000,
-          mimetype: 'application/octet-stream',
-        },
-      },
-      {
-        test: /\.eot(\?.+)?$/,
-        loader: 'url-loader',
-        options: {
-          limit: 10000,
-        },
-      },
-      {
-        test: /\.svg(\?.+)?$/,
-        loader: 'url-loader',
-        options: {
-          limit: 10000,
-          mimetype: 'image/svg+xml',
-        },
-      },
-      {
-        test: /\.png$/,
-        loader: 'url-loader',
-        options: {
-          limit: 10000,
-          mimetype: 'image/png',
-        },
-      },
-      {
-        test: /\.gif$/,
-        loader: 'url-loader',
-        options: {
-          limit: 10000,
-          mimetype: 'image/gif',
-        },
-      },
-    ],
+        test: /\.tsx?$/,
+        loader: 'ts-loader'
+      }
+    ]
   },
-};
+  resolve: {
+    extensions: ['.js', '.ts', '.tsx', '.jsx', '.json']
+  },
+  node: {
+    __dirname: false
+  },
+}
+
+module.exports = [
+  Object.assign(
+    {
+      target: 'electron-main',
+      entry: { main: './src/main.ts' }
+    },
+    commonConfig),
+  Object.assign(
+    {
+      target: 'electron-renderer',
+      entry: { gui: './src/gui.tsx' },
+      plugins: [new HtmlWebpackPlugin()]
+    },
+    commonConfig)
+]

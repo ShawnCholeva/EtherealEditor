@@ -31,6 +31,8 @@ bower_components
 
 # Compiled binary addons (http://nodejs.org/api/addons.html)
 build/Release
+release-builds
+dist
 
 # Dependency directories
 node_modules/
@@ -57,3 +59,5 @@ typings/
 # dotenv environment variables file
 .env
 
+# editor related folders
+.vscode
