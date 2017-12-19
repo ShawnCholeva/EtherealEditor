@@ -42,8 +42,11 @@ module.exports = [
   Object.assign(
     {
       target: 'electron-renderer',
-      entry: { gui: './src/gui.tsx' },
-      plugins: [new HtmlWebpackPlugin()]
+      entry: { index: './src/index.tsx' },
+      plugins: [new HtmlWebpackPlugin({
+        title: 'Ethereal',
+        template: './src/index.html'
+      })]
     },
     commonConfig)
 ]

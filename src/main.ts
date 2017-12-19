@@ -1,12 +1,19 @@
-import { app, BrowserWindow } from 'electron'
+import { app, BrowserWindow, Menu } from 'electron'
+import { template } from './menu'
+
 declare var __dirname: string
 let mainWindow: Electron.BrowserWindow
+let menu: Electron.Menu
 
 function onReady() {
   mainWindow = new BrowserWindow({
-    width: 800,
-    height: 600
+    backgroundColor: '#1E1E1C'
   })
+
+  mainWindow.maximize()
+
+  menu = Menu.buildFromTemplate(template)
+  Menu.setApplicationMenu(menu)
 
   const fileName = `file://${__dirname}/index.html`
   mainWindow.loadURL(fileName)
@@ -16,4 +23,3 @@ function onReady() {
 app.on('ready', () => onReady())
 
 app.on('window-all-closed', () => app.quit())
-console.log(`Electron Version ${app.getVersion()}`)
