@@ -4,7 +4,7 @@ export const template: Electron.MenuItemConstructorOptions[] = [
   {
     label: 'File',
     submenu: [
-        { label: 'Open Folder...', click: menuService.findDirectory },
+        { label: 'Open Folder...', click: menuService.populateFileExplorerDirectory },
         { type: 'separator' },
         { label: 'Close Editor', role: 'close' }
     ]

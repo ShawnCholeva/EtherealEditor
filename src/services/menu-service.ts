@@ -3,7 +3,7 @@ import { BrowserWindow, dialog } from 'electron'
 import fileExplorerService from './file-explorer-service'
 
 class MenuService {
-  findDirectory(): void {
+  populateFileExplorerDirectory(): void {
     dialog.showOpenDialog(BrowserWindow.getFocusedWindow(), {
       properties: ['openDirectory']
     }, (fileNames: string[] | undefined) => {

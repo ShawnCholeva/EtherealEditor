@@ -1,6 +1,6 @@
 import * as fs from 'fs'
 
-import { FileDirectoryTree, FileDirectoryNode } from '../models/fileDirectory'
+import { FileDirectoryTree, FileDirectoryNode } from '../models/file-directory'
 
 class FileExplorerService {
   public buildFileExplorerDirectory(directoryPath: string): FileDirectoryTree {
