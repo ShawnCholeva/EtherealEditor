@@ -16,9 +16,6 @@ class FileExplorerService {
 
         explorerDirectory.nodes.push(<FileDirectoryNode>{fileName: rootDirectory, parent: directoryBasePath, fileType: 'directory', children: children });
 
-        console.dir(explorerDirectory)
-        console.dir(explorerDirectory.nodes[0].children)
-        console.dir(explorerDirectory.nodes[0].children[0].children)
         return explorerDirectory
   }
 
