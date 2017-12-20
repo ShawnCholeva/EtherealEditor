@@ -1,56 +1,56 @@
-import { BrowserWindow, dialog } from 'electron'
-import * as fs from 'fs';
+import * as fs from 'fs'
 
-import { FileDirectoryTree } from '../models/fileDirectoryTree'
-import { FileDirectoryNode } from '../models/fileDirectoryNode'
+import { FileDirectoryTree, FileDirectoryNode } from '../models/fileDirectory'
 
 class FileExplorerService {
-    buildFileExplorerDirectory(directoryPath: string): FileDirectoryTree {
-        let explorerDirectory: FileDirectoryTree = new FileDirectoryTree();
-        let directoryBasePath = this.getDirectoryBasePath(directoryPath)
-        explorerDirectory.rootDirectoryPath = directoryBasePath
+  buildFileExplorerDirectory(directoryPath: string): FileDirectoryTree {
+    let explorerDirectory: FileDirectoryTree = new FileDirectoryTree()
+    let directoryBasePath = this.getDirectoryBasePath(directoryPath)
 
-        let rootDirectory = this.getLastDirectoryInFilePath(directoryPath)
+    explorerDirectory.rootDirectoryPath = directoryBasePath
 
-        let children = this.getChildrenFilesInDirectory(directoryPath)
+    let rootDirectory = this.getLastDirectoryInFilePath(directoryPath)
 
-        explorerDirectory.nodes.push(<FileDirectoryNode>{fileName: rootDirectory, parent: directoryBasePath, fileType: 'directory', children: children });
+    let children = this.getChildrenFilesInDirectory(directoryPath)
 
-        return explorerDirectory
+    explorerDirectory.nodes.push({ fileName: rootDirectory, parent: directoryBasePath, fileType: 'directory', children: children } as FileDirectoryNode)
+
+    return explorerDirectory
   }
 
   getDirectoryBasePath(directoryPath: string): string {
-    var directoryPathPieces = directoryPath.split("\\")
-    directoryPathPieces.pop();
-    var directoryBasePath = directoryPathPieces.join("\\")
+    let directoryPathPieces = directoryPath.split('\\')
+    directoryPathPieces.pop()
+    let directoryBasePath = directoryPathPieces.join('\\')
 
     return directoryBasePath
   }
-  
+
   getLastDirectoryInFilePath(filePath: string): string {
-    var directoryPathPieces = filePath.split("\\")
-    var lastDirectory = directoryPathPieces[directoryPathPieces.length - 1];
+    let directoryPathPieces = filePath.split('\\')
+    let lastDirectory = directoryPathPieces[directoryPathPieces.length - 1]
 
     return lastDirectory
   }
 
   getChildrenFilesInDirectory(directoryPath: string): FileDirectoryNode[] {
-    let children: FileDirectoryNode[] = new Array() 
-    
+    let children: FileDirectoryNode[] = new Array()
+
     let files = fs.readdirSync(directoryPath)
-    let parentDirectoryName = this.getLastDirectoryInFilePath(directoryPath);
+    let parentDirectoryName = this.getLastDirectoryInFilePath(directoryPath)
 
-    files.forEach( file => {
-        if(fs.lstatSync(`${directoryPath}\\${file}`).isDirectory()){
-            let directoryChildren = this.getChildrenFilesInDirectory(`${directoryPath}\\${file}`)
-            children.push(<FileDirectoryNode>{fileName: file, parent: parentDirectoryName, fileType: 'directory', children: directoryChildren})
-            
-        } else {
-            children.push(<FileDirectoryNode>{fileName: file, parent: parentDirectoryName, fileType: 'file', children: null })
-        }
-    });
+    files.forEach(file => {
+      if (fs.lstatSync(`${directoryPath}\\${file}`).isDirectory()) {
+        let directoryChildren = this.getChildrenFilesInDirectory(`${directoryPath}\\${file}`)
+        children.push({ fileName: file, parent: parentDirectoryName, fileType: 'directory', children: directoryChildren } as FileDirectoryNode)
+      } else {
+        let fileTypePieces = file.split('.')
+        let fileType = fileTypePieces[fileTypePieces.length - 1]
+        children.push({ fileName: file, parent: parentDirectoryName, fileType: fileType, children: null } as FileDirectoryNode)
+      }
+    })
 
-    return children;
+    return children
   }
 }
 
