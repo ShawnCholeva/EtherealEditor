@@ -3,7 +3,7 @@ import * as fs from 'fs'
 import { FileDirectoryTree, FileDirectoryNode } from '../models/fileDirectory'
 
 class FileExplorerService {
-  buildFileExplorerDirectory(directoryPath: string): FileDirectoryTree {
+  public buildFileExplorerDirectory(directoryPath: string): FileDirectoryTree {
     let explorerDirectory: FileDirectoryTree = new FileDirectoryTree()
     let directoryBasePath = this.getDirectoryBasePath(directoryPath)
 
@@ -18,7 +18,7 @@ class FileExplorerService {
     return explorerDirectory
   }
 
-  getDirectoryBasePath(directoryPath: string): string {
+  private getDirectoryBasePath(directoryPath: string): string {
     let directoryPathPieces = directoryPath.split('\\')
     directoryPathPieces.pop()
     let directoryBasePath = directoryPathPieces.join('\\')
@@ -26,14 +26,14 @@ class FileExplorerService {
     return directoryBasePath
   }
 
-  getLastDirectoryInFilePath(filePath: string): string {
+  private getLastDirectoryInFilePath(filePath: string): string {
     let directoryPathPieces = filePath.split('\\')
     let lastDirectory = directoryPathPieces[directoryPathPieces.length - 1]
 
     return lastDirectory
   }
 
-  getChildrenFilesInDirectory(directoryPath: string): FileDirectoryNode[] {
+  private getChildrenFilesInDirectory(directoryPath: string): FileDirectoryNode[] {
     let children: FileDirectoryNode[] = new Array()
 
     let files = fs.readdirSync(directoryPath)
