@@ -1,27 +1,28 @@
-import React from 'react'
-import ReactDOM from 'react-dom'
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { createStore } from 'redux';
+import { Provider } from 'react-redux';
 
-import SideMenu from './components/side-menu'
+import allReducers from './reducers/index';
+import SideMenu from './components/side-menu';
 
 const mainWindowContainerStyle = {
     display: 'inline-block'
-}
+};
 
 const menuContainerStyle = {
     display: 'inline-block',
     width: '15%'
-}
+};
 
 const bootstrapperElement: HTMLElement = document.getElementById('app') as HTMLElement;
 
+const store = createStore(
+    allReducers
+);
+
 ReactDOM.render(
-    
-    <div>
-        <div style={menuContainerStyle}>
-            <SideMenu />
-        </div>
-        <div style={mainWindowContainerStyle}>
-            Node version: {process.versions.node}
-        </div>
-    </div>,
-    bootstrapperElement)
+    <Provider store={store}>
+        <SideMenu />
+    </Provider>,
+    bootstrapperElement);

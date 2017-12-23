@@ -1,23 +1,18 @@
-import React, { Component } from 'react'
-import ReactDOM from 'react-dom'
+import React, { Component } from 'react';
+import ReactDOM from 'react-dom';
+
+import FileExplorer from '../containers/file-explorer';
 
 const container = {
     border: '1px solid white',
     height: '98vh'
-}
+};
 
 class SideMenu extends Component {
-    componentDidMount(){
-
-    }
-    
-    render(){
+    render() {
         return (
             <div style={container}>
-                <h3 style={{color: 'grey'}}>FILE EXPLORER</h3>
-                <div id='contents'>
-                <h4>Contents</h4>
-                </div>
+                <FileExplorer />
             </div>
         );
     }
