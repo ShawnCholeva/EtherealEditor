@@ -5,12 +5,7 @@ import { connect } from 'react-redux';
 import { FileDirectoryTree } from '../models/file-directory';
 import { loadFolder } from '../actions/file-explorer';
 
-// TODO: Make Props Type in Props folder inside Models folder to use as string typed properties in components
-
-interface Props {
-    fileExplorer: FileDirectoryTree;
-}
-
+// TODO: Make Props Type model to use isntead of any
 class FileExplorer extends Component<any> {
     render() {
         return (

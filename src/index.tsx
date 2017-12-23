@@ -4,16 +4,7 @@ import { createStore } from 'redux';
 import { Provider } from 'react-redux';
 
 import allReducers from './reducers/index';
-import SideMenu from './components/side-menu';
-
-const mainWindowContainerStyle = {
-    display: 'inline-block'
-};
-
-const menuContainerStyle = {
-    display: 'inline-block',
-    width: '15%'
-};
+import App from './app';
 
 const bootstrapperElement: HTMLElement = document.getElementById('app') as HTMLElement;
 
@@ -23,6 +14,6 @@ const store = createStore(
 
 ReactDOM.render(
     <Provider store={store}>
-        <SideMenu />
+        <App />
     </Provider>,
     bootstrapperElement);

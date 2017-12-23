@@ -3,15 +3,14 @@ import ReactDOM from 'react-dom';
 
 import FileExplorer from '../containers/file-explorer';
 
-const container = {
-    border: '1px solid white',
-    height: '98vh'
+const menuContainerStyle = {
+    color: 'red'
 };
 
 class SideMenu extends Component {
     render() {
         return (
-            <div style={container}>
+            <div style={menuContainerStyle}>
                 <FileExplorer />
             </div>
         );
