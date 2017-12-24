@@ -3,22 +3,25 @@ import { createStore } from 'redux';
 
 import allReducers from '../reducers/index';
 import { loadFolder } from '../actions/file-explorer';
-
-// TODO: Figure out if this is even the way we want to go, much less using any in this scenario
+import { IDispatchEvent } from '../models/interfaces/dispatch-event';
+import { FileDirectoryTree } from '../models/file-directory';
+import { IStore } from '../models/interfaces/store';
+import { LOAD_FOLDER_DISPATCH_EVENT } from '../constants/dispatch-event-types';
 
 export default class StoreProvider {
     private static _instance: StoreProvider;
-    store: any = null;
+    store: IStore;
 
     constructor() {
         let defaultState = {};
+
         this.store = createStore(
             allReducers,
             defaultState
         );
 
-        ipcRenderer.on('dispatch-action', (event: any, arg: any) => {
-            this.store.dispatch(loadFolder(arg.payload.data));
+        ipcRenderer.on(LOAD_FOLDER_DISPATCH_EVENT, (event: IDispatchEvent, arg: FileDirectoryTree) => {
+            this.store.dispatch(loadFolder(arg));
         });
     }
 

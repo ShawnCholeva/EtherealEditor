@@ -4,25 +4,22 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 import FileExplorer from '../components/file-explorer';
+import { ISideMenu, ISideMenuState } from '../models/interfaces/side-menu';
 
-// TODO: Find out how to avoice 'any' usage
-
-class SideMenu extends Component<any> {
+class SideMenu extends Component<ISideMenu> {
     render() {
         return (
             <div>
-                <FileExplorer fileExplorerInfo={this.props.fileExplorer}/>
+                <FileExplorer fileExplorerTree={this.props.fileExplorerTree}/>
             </div>
         );
     }
 }
 
-const mapStateToProps = (state: any) => {
+const mapStateToProps = (state: ISideMenuState) => {
     return {
-        fileExplorer: state.fileExplorer,
-        testState: state
+        fileExplorerTree: state.fileExplorer
     };
 };
 
-// TODO: Find out how to map these props so we don't use any here
-export default connect<any>(mapStateToProps, {})(SideMenu);
+export default connect<ISideMenu, {}, {}, ISideMenuState>(mapStateToProps)(SideMenu);

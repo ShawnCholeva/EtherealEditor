@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 
 import SideMenu from './containers/side-menu';
-require('./app.less');
+import './app.less';
 
 class App extends Component {
     render() {
