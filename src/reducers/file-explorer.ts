@@ -1,8 +1,8 @@
-export default (state = null, action: any) => {
+export default (state: any = null, action: any) => {
     switch (action.type) {
     case 'FOLDER_LOADED':
         return action.payload;
+    default:
+        return state;
     }
-
-    return state;
 };

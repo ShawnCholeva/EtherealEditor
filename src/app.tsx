@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 
-import SideMenu from './components/side-menu';
+import SideMenu from './containers/side-menu';
 
 const mainWindowContainerStyle = {
     border: '1px solid white',

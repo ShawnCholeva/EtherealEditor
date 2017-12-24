@@ -2,6 +2,7 @@ import { BrowserWindow, dialog } from 'electron';
 
 import fileExplorerService from './file-explorer-service';
 import { loadFolder } from '../actions/file-explorer';
+import StoreProvider from '../providers/store-provider';
 
 class MenuService {
     populateFileExplorerDirectory(): void {
@@ -12,7 +13,7 @@ class MenuService {
                 console.log('No directory was selected');
             } else {
                 let fileDirectoryTree = fileExplorerService.buildFileExplorerDirectory(fileNames[0]);
-                loadFolder(fileDirectoryTree);
+                BrowserWindow.getFocusedWindow().webContents.send('dispatch-action', { payload: { action: loadFolder, info: loadFolder, data: fileDirectoryTree } });
             }
         });
     }
