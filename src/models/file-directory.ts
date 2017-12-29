@@ -5,6 +5,7 @@ export class FileDirectoryTree {
 
 export class FileDirectoryNode {
     public fileName: string;
+    public extension: string | null;
     public parent: string | null = null;
     public children: FileDirectoryNode[] | null = null;
     public fileType: string;

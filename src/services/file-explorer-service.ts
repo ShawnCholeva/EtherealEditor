@@ -42,11 +42,11 @@ class FileExplorerService {
         files.forEach(file => {
             if (fs.lstatSync(`${directoryPath}\\${file}`).isDirectory()) {
                 let directoryChildren = this.getChildrenFilesInDirectory(`${directoryPath}\\${file}`);
-                children.push({ fileName: file, parent: parentDirectoryName, fileType: 'directory', children: directoryChildren } as FileDirectoryNode);
+                children.push({ fileName: file, parent: parentDirectoryName, extension: null, fileType: 'directory', children: directoryChildren } as FileDirectoryNode);
             } else {
                 let fileTypePieces = file.split('.');
-                let fileType = fileTypePieces[fileTypePieces.length - 1];
-                children.push({ fileName: file, parent: parentDirectoryName, fileType: fileType, children: null } as FileDirectoryNode);
+                let extension = fileTypePieces[fileTypePieces.length - 1];
+                children.push({ fileName: file, parent: parentDirectoryName, extension: extension, fileType: 'file', children: null } as FileDirectoryNode);
             }
         });
 

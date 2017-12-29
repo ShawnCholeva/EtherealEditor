@@ -1,18 +1,18 @@
 import React, { Component } from 'react';
 
 import { IFileExplorer } from '../models/interfaces/file-explorer';
+import FolderContent from './folder-content';
+
+import './file-explorer.less';
 
 class FileExplorer extends Component<IFileExplorer> {
     render() {
         return (
-            <div>
-                <h3 onClick={() => console.log(this.props.fileExplorerTree)}>FILE EXPLORER</h3>
+            <div className='explorer-container'>
+                <h3 className='explorer-header' onClick={() => console.log(this.props.fileExplorerTree)}>FILE EXPLORER</h3>
                 <div id='contents'>
-                <h4>Contents</h4>
                 {this.props.fileExplorerTree !== null &&
-                    this.props.fileExplorerTree.nodes.map((file: any) => {
-                        return file.fileName;
-                    })
+                    <FolderContent files={this.props.fileExplorerTree.nodes}/>
                 }
                 </div>
             </div>
