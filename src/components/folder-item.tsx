@@ -7,7 +7,6 @@ import { FileItem } from './file-item';
 import './folder-item.less';
 
 interface IFolderItem {
-    isRoot: boolean;
     folder: FileDirectoryNode;
 }
 
@@ -51,11 +50,11 @@ export class FolderItem extends Component<IFolderItem, IFolderState> {
     render(): any {
         return (
             <div className='explorer-item'>
-                <span className={this.props.isRoot ? 'root-folder' : ''} onClick={() => this.openFolder()}>{this.props.folder.fileName}</span>
+                <span onClick={() => this.openFolder()}>{this.props.folder.fileName}</span>
                 {this.state.isOpen && this.props.folder.children !== null &&
                     this.sortedChildren.map((item, index) => {
                         if (item.fileType === 'directory') {
-                            return <FolderItem key={index} folder={item} isRoot={false} />;
+                            return <FolderItem key={index} folder={item} />;
                         } else {
                             return <FileItem key={index} file={item} />;
                         }
