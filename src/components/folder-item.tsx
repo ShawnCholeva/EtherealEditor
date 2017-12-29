@@ -43,20 +43,20 @@ export class FolderItem extends Component<IFolderItem, IFolderState> {
         this.setState({
             isOpen: !this.state.isOpen
         });
-
-        console.log(this.sortedChildren);
     }
 
     render(): any {
         return (
-            <div className='explorer-item'>
+            <div>
+                <div className='explorer-item-title'>
                 <span onClick={() => this.openFolder()}>{this.props.folder.fileName}</span>
+                </div>
                 {this.state.isOpen && this.props.folder.children !== null &&
                     this.sortedChildren.map((item, index) => {
                         if (item.fileType === 'directory') {
-                            return <FolderItem key={index} folder={item} />;
+                            return <div key={index} className='explorer-item'><FolderItem folder={item} /></div>;
                         } else {
-                            return <FileItem key={index} file={item} />;
+                            return <div key={index} className='explorer-item'><FileItem file={item} /></div>;
                         }
                     })
                 }

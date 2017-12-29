@@ -9,10 +9,14 @@ interface IFileItem {
 }
 
 export class FileItem extends Component<IFileItem> {
+    openFile() {
+        console.log(`Opening ${this.props.file.fileName}`);
+    }
+
     render(): any {
         return (
             <div className='explorer-item'>
-                <span>{this.props.file.fileName}</span>
+                <span onClick={() => this.openFile()}>{this.props.file.fileName}</span>
             </div>
         );
     }
