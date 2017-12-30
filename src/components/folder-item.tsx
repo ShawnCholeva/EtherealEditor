@@ -47,14 +47,14 @@ export class FolderItem extends Component<IFolderItem, IFolderState> {
 
     render(): any {
         return (
-            <div className='explorer-item-container'>
+            <div>
                 <div className='explorer-item' onClick={() => this.openFolder()}>
-                    <span>{this.props.folder.fileName}</span>
+                    <span className='explorer-item-text'>{this.props.folder.fileName}</span>
                 </div>
                 {this.state.isOpen && this.props.folder.children !== null &&
                     this.sortedChildren.map((item, index) => {
                         if (item.fileType === 'directory') {
-                            return <FolderItem key={index} folder={item} />;
+                            return <div key={index} className='nested-explorer-item-container'><FolderItem folder={item} /></div>;
                         } else {
                             return <div key={index} className='explorer-item-container'><FileItem file={item} /></div>;
                         }

@@ -16,7 +16,7 @@ export class FileItem extends Component<IFileItem> {
     render(): any {
         return (
             <div onClick={() => this.openFile()} className='explorer-item'>
-                <span>{this.props.file.fileName}</span>
+                <span className='explorer-item-text'>{this.props.file.fileName}</span>
             </div>
         );
     }
