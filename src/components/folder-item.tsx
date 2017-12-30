@@ -4,7 +4,7 @@ import { IFileExplorer } from '../models/interfaces/file-explorer';
 import { FileDirectoryNode } from '../models/file-directory';
 import { FileItem } from './file-item';
 
-import './folder-item.less';
+import './folder-content.less';
 
 interface IFolderItem {
     folder: FileDirectoryNode;
@@ -16,7 +16,7 @@ interface IFolderState {
 
 export class FolderItem extends Component<IFolderItem, IFolderState> {
 
-    sortedChildren: any[] = [];
+    sortedChildren: FileDirectoryNode[] = new Array();
     constructor(props: any) {
         super(props);
 
@@ -47,16 +47,16 @@ export class FolderItem extends Component<IFolderItem, IFolderState> {
 
     render(): any {
         return (
-            <div>
-                <div className='explorer-item-title'>
-                <span onClick={() => this.openFolder()}>{this.props.folder.fileName}</span>
+            <div className='explorer-item-container'>
+                <div className='explorer-item' onClick={() => this.openFolder()}>
+                    <span>{this.props.folder.fileName}</span>
                 </div>
                 {this.state.isOpen && this.props.folder.children !== null &&
                     this.sortedChildren.map((item, index) => {
                         if (item.fileType === 'directory') {
-                            return <div key={index} className='explorer-item'><FolderItem folder={item} /></div>;
+                            return <FolderItem key={index} folder={item} />;
                         } else {
-                            return <div key={index} className='explorer-item'><FileItem file={item} /></div>;
+                            return <div key={index} className='explorer-item-container'><FileItem file={item} /></div>;
                         }
                     })
                 }

@@ -59,7 +59,7 @@ class FolderContent extends Component<IFolderContent, IFolderContentState> {
                         if (item.fileType === 'directory') {
                             return <FolderItem key={index} folder={item} />;
                         } else {
-                            return <FileItem key={index} file={item} />;
+                            return <div key={index} className='explorer-item-container'><FileItem file={item} /></div>;
                         }
                     })
                 }
