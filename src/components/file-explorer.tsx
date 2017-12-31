@@ -10,7 +10,7 @@ class FileExplorer extends Component<IFileExplorer> {
         return (
             <div className='explorer-container'>
                 <h3 className='explorer-header' onClick={() => console.log(this.props.fileExplorerTree)}>FILE EXPLORER</h3>
-                <div id='contents'>
+                <div className='content'>
                 {this.props.fileExplorerTree !== null &&
                     <FolderContent files={this.props.fileExplorerTree.nodes}/>
                 }

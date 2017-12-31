@@ -1,13 +1,8 @@
 import React, { Component } from 'react';
-
 import { IFileExplorer } from '../models/interfaces/file-explorer';
-
-import { FolderItem } from './folder-item';
-import { FileItem } from './file-item';
-
+import FileExplorerItem from './file-explorer-item';
 import { FileDirectoryNode } from '../models/file-directory';
-
-import './folder-content.less';
+import './file-explorer.less';
 
 interface IFolderContent {
     files: FileDirectoryNode[];
@@ -31,13 +26,13 @@ class FolderContent extends Component<IFolderContent, IFolderContentState> {
     componentDidMount() {
         if (this.props.files[0].children !== null) {
             this.sortedChildren = this.props.files[0].children.sort((currentChildItem, nextChildItem): any => {
-                let child1 = currentChildItem.fileType.toUpperCase();
-                let child2 = nextChildItem.fileType.toUpperCase();
+                let child1 = currentChildItem.isDirectory;
+                let child2 = nextChildItem.isDirectory;
 
                 let child1Name = currentChildItem.fileName.toUpperCase();
                 let child2Name = nextChildItem.fileName.toUpperCase();
 
-                return (child1 < child2) ? -1 : (child1 > child2) ? 1 : 0 || (child1Name < child2Name) ? -1 : (child1Name > child2Name) ? 1 : 0;
+                return (child1 > child2) ? -1 : (child1 < child2) ? 1 : 0 || (child1Name < child2Name) ? -1 : (child1Name > child2Name) ? 1 : 0;
             });
         }
     }
@@ -56,11 +51,7 @@ class FolderContent extends Component<IFolderContent, IFolderContentState> {
                 </div>
                 {this.state.isOpen && this.props.files[0].children !== null &&
                     this.sortedChildren.map((item, index) => {
-                        if (item.fileType === 'directory') {
-                            return <FolderItem key={index} folder={item} />;
-                        } else {
-                            return <div key={index} className='root-explorer-item-container'><FileItem file={item} /></div>;
-                        }
+                        return <div key={index} className='nested-file-item'><FileExplorerItem item={item} /></div>;
                     })
                 }
             </div>

@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 
 import { IFileExplorer } from '../models/interfaces/file-explorer';
 import { FileDirectoryNode } from '../models/file-directory';
-import { FileItem } from './file-item';
+import FileExplorerItem from './file-explorer-item';
 
-import './folder-content.less';
+import './file-explorer.less';
 
 interface IFolderItem {
     folder: FileDirectoryNode;
@@ -17,6 +17,9 @@ interface IFolderState {
 export class FolderItem extends Component<IFolderItem, IFolderState> {
 
     sortedChildren: FileDirectoryNode[] = new Array();
+    explorerItemTextStyle = {
+        'padding': `2px 0px 2px ${this.props.folder.directoryLevel * 10}px`
+    };
     constructor(props: any) {
         super(props);
 
@@ -28,18 +31,19 @@ export class FolderItem extends Component<IFolderItem, IFolderState> {
     componentDidMount() {
         if (this.props.folder.children !== null) {
             this.sortedChildren = this.props.folder.children.sort((currentChildItem, nextChildItem): any => {
-                let child1 = currentChildItem.fileType.toUpperCase();
-                let child2 = nextChildItem.fileType.toUpperCase();
+                let child1 = currentChildItem.isDirectory;
+                let child2 = nextChildItem.isDirectory;
 
                 let child1Name = currentChildItem.fileName.toUpperCase();
                 let child2Name = nextChildItem.fileName.toUpperCase();
 
-                return (child1 < child2) ? -1 : (child1 > child2) ? 1 : 0 || (child1Name < child2Name) ? -1 : (child1Name > child2Name) ? 1 : 0;
+                return (child1 > child2) ? -1 : (child1 < child2) ? 1 : 0 || (child1Name < child2Name) ? -1 : (child1Name > child2Name) ? 1 : 0;
             });
         }
     }
 
     openFolder() {
+        console.log(this.props.folder.directoryLevel);
         this.setState({
             isOpen: !this.state.isOpen
         });
@@ -49,15 +53,11 @@ export class FolderItem extends Component<IFolderItem, IFolderState> {
         return (
             <div>
                 <div className='explorer-item' onClick={() => this.openFolder()}>
-                    <span className='explorer-item-text'>{this.props.folder.fileName}</span>
+                    <span style={this.explorerItemTextStyle}>{this.props.folder.fileName}</span>
                 </div>
                 {this.state.isOpen && this.props.folder.children !== null &&
                     this.sortedChildren.map((item, index) => {
-                        if (item.fileType === 'directory') {
-                            return <div key={index} className='nested-explorer-item-container'><FolderItem folder={item} /></div>;
-                        } else {
-                            return <div key={index} className='explorer-item-container'><FileItem file={item} /></div>;
-                        }
+                        return <FileExplorerItem key={index} item={item} />;
                     })
                 }
             </div>

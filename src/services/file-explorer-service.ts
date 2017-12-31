@@ -5,25 +5,20 @@ import { FileDirectoryTree, FileDirectoryNode } from '../models/file-directory';
 class FileExplorerService {
     public buildFileExplorerDirectory(directoryPath: string): FileDirectoryTree {
         let explorerDirectory: FileDirectoryTree = new FileDirectoryTree();
-        let directoryBasePath = this.getDirectoryBasePath(directoryPath);
-
-        explorerDirectory.rootDirectoryPath = directoryBasePath;
-
         let rootDirectory = this.getLastDirectoryInFilePath(directoryPath);
 
-        let children = this.getChildrenFilesInDirectory(directoryPath);
+        let rootNode = new FileDirectoryNode();
+        rootNode.isRootDirectory = true;
+        rootNode.fileName = rootDirectory;
+        rootNode.path = directoryPath;
+        rootNode.isDirectory = true;
+        rootNode.extension = null;
+        rootNode.directoryLevel = 1;
+        rootNode.children = this.getChildrenFilesInDirectory(rootNode.directoryLevel, directoryPath);
 
-        explorerDirectory.nodes.push({ fileName: rootDirectory, parent: directoryBasePath, fileType: 'directory', children: children } as FileDirectoryNode);
+        explorerDirectory.nodes.push(rootNode);
 
         return explorerDirectory;
-    }
-
-    private getDirectoryBasePath(directoryPath: string): string {
-        let directoryPathPieces = directoryPath.split('\\');
-        directoryPathPieces.pop();
-        let directoryBasePath = directoryPathPieces.join('\\');
-
-        return directoryBasePath;
     }
 
     private getLastDirectoryInFilePath(filePath: string): string {
@@ -33,20 +28,38 @@ class FileExplorerService {
         return lastDirectory;
     }
 
-    private getChildrenFilesInDirectory(directoryPath: string): FileDirectoryNode[] {
+    private getChildrenFilesInDirectory(directoryLevel: number, directoryPath: string): FileDirectoryNode[] {
         let children: FileDirectoryNode[] = new Array();
 
         let files = fs.readdirSync(directoryPath);
-        let parentDirectoryName = this.getLastDirectoryInFilePath(directoryPath);
 
         files.forEach(file => {
-            if (fs.lstatSync(`${directoryPath}\\${file}`).isDirectory()) {
-                let directoryChildren = this.getChildrenFilesInDirectory(`${directoryPath}\\${file}`);
-                children.push({ fileName: file, parent: parentDirectoryName, extension: null, fileType: 'directory', children: directoryChildren } as FileDirectoryNode);
+            let fileDirectoryPath = `${directoryPath}\\${file}`;
+
+            let childNode = new FileDirectoryNode();
+            childNode.directoryLevel = directoryLevel + 1;
+            childNode.fileName = file;
+            childNode.isRootDirectory = false;
+
+            if (fs.lstatSync(fileDirectoryPath).isDirectory()) {
+                let directoryChildren = this.getChildrenFilesInDirectory(childNode.directoryLevel, fileDirectoryPath);
+
+                childNode.extension = null;
+                childNode.isDirectory = true;
+                childNode.children = directoryChildren;
+                childNode.path = fileDirectoryPath;
+
+                children.push(childNode);
             } else {
                 let fileTypePieces = file.split('.');
                 let extension = fileTypePieces[fileTypePieces.length - 1];
-                children.push({ fileName: file, parent: parentDirectoryName, extension: extension, fileType: 'file', children: null } as FileDirectoryNode);
+
+                childNode.extension = extension;
+                childNode.isDirectory = false;
+                childNode.children = null;
+                childNode.path = fileDirectoryPath;
+
+                children.push(childNode);
             }
         });
 
