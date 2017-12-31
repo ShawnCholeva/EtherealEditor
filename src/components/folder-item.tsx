@@ -3,6 +3,7 @@ import React, { Component } from 'react';
 import { IFileExplorer } from '../models/interfaces/file-explorer';
 import { FileDirectoryNode } from '../models/file-directory';
 import FileExplorerItem from './file-explorer-item';
+import { Icon } from 'react-fa';
 
 import './file-explorer.less';
 
@@ -43,17 +44,24 @@ export class FolderItem extends Component<IFolderItem, IFolderState> {
     }
 
     openFolder() {
-        console.log(this.props.folder.directoryLevel);
         this.setState({
             isOpen: !this.state.isOpen
         });
     }
 
     render(): any {
+        let folderIcon = null;
+
+        if (this.state.isOpen) {
+            folderIcon = <Icon name='chevron-down' />;
+        } else {
+            folderIcon = <Icon name='chevron-right' />;
+        }
+
         return (
             <div>
                 <div className='explorer-item' onClick={() => this.openFolder()}>
-                    <span style={this.explorerItemTextStyle}>{this.props.folder.fileName}</span>
+                    <span style={this.explorerItemTextStyle}><span className='explorer-item-icon'>{folderIcon}</span>{this.props.folder.fileName}</span>
                 </div>
                 {this.state.isOpen && this.props.folder.children !== null &&
                     this.sortedChildren.map((item, index) => {

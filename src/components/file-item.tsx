@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
 import { FileDirectoryNode } from '../models/file-directory';
+import { Icon } from 'react-fa';
 
 import './file-explorer.less';
 
@@ -14,13 +15,13 @@ export class FileItem extends Component<IFileItem> {
     };
 
     openFile() {
-        console.log(`Opening ${this.props.file.fileName}`);
+        console.log(`Opening ${this.props.file.fileName} from ${this.props.file.path}`);
     }
 
     render(): any {
         return (
             <div onClick={() => this.openFile()} className='explorer-item'>
-                <span style={this.explorerItemTextStyle}>{this.props.file.fileName}</span>
+                <span style={this.explorerItemTextStyle}><span className='explorer-item-icon'><Icon name='file' /></span>{this.props.file.fileName}</span>
             </div>
         );
     }

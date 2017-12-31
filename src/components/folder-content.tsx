@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { IFileExplorer } from '../models/interfaces/file-explorer';
 import FileExplorerItem from './file-explorer-item';
 import { FileDirectoryNode } from '../models/file-directory';
+import { Icon } from 'react-fa';
 import './file-explorer.less';
 
 interface IFolderContent {
@@ -44,10 +45,19 @@ class FolderContent extends Component<IFolderContent, IFolderContentState> {
     }
 
     render() {
+        let folderIcon = null;
+
+        if (this.state.isOpen) {
+            folderIcon = <Icon name='chevron-down'/>;
+        } else {
+            folderIcon = <Icon name='chevron-right' />;
+        }
+
         return (
             <div>
                 <div className='root-folder' onClick={() => this.openRootFolder()}>
-                    <span >{this.props.files[0].fileName}</span>
+                    <span className='explorer-item-icon'>{folderIcon}</span>
+                    <span>{this.props.files[0].fileName}</span>
                 </div>
                 {this.state.isOpen && this.props.files[0].children !== null &&
                     this.sortedChildren.map((item, index) => {
