@@ -1,6 +1,6 @@
 import { FileDirectoryNode } from '../../file-directory';
 
-export default interface IFileExplorerItem {
-    item: FileDirectoryNode;
+export default interface IFolderItem {
+    folder: FileDirectoryNode;
     isRoot: boolean;
 }

@@ -1,5 +1,5 @@
 import { FileDirectoryTree } from '../../file-directory';
 
-export interface IFileExplorer {
+export default interface IFileExplorer {
     fileExplorerTree: FileDirectoryTree | null;
 }

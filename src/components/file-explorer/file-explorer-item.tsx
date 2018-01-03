@@ -1,15 +1,15 @@
 import React, { Component } from 'react';
 
-import { IFileExplorer } from '../../models/interfaces/file-explorer/file-explorer';
-import { IFileExplorerItem } from '../../models/interfaces/file-explorer/file-explorer-item';
 import { FileDirectoryNode } from '../../models/file-directory';
-import { FileItem } from './file-item';
-
-import './file-explorer.less';
+import IFileExplorer from '../../models/interfaces/file-explorer/file-explorer';
+import IFileExplorerItem from '../../models/interfaces/file-explorer/file-explorer-item';
+import FileItem from './file-item';
 import FolderItem from './folder-item';
 
+import './file-explorer.less';
+
 export default class FileExplorerItem extends Component<IFileExplorerItem> {
-    render(): any {
+    render() {
         let explorerItem = null;
 
         if (this.props.item.isDirectory) {

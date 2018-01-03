@@ -1,28 +1,20 @@
 import React, { Component } from 'react';
 import { Icon } from 'react-fa';
 
-import { IFileExplorer } from '../../models/interfaces/file-explorer/file-explorer';
 import { FileDirectoryNode } from '../../models/file-directory';
 import FileExplorerItem from './file-explorer-item';
+import IFolderItem from '../../models/interfaces/file-explorer/folder-item';
+import IFolderState from '../../models/interfaces/file-explorer/folder-state';
 
 import './file-explorer.less';
 
-interface IFolderItem {
-    folder: FileDirectoryNode;
-    isRoot: boolean;
-}
-
-interface IFolderState {
-    isOpen: boolean;
-}
-
 export default class FolderItem extends Component<IFolderItem, IFolderState> {
-
     sortedChildren: FileDirectoryNode[] = new Array();
     explorerItemTextStyle = {
         'padding': `2px 0px 2px ${this.props.folder.directoryLevel * 10}px`
     };
-    constructor(props: any) {
+
+    constructor(props: IFolderItem) {
         super(props);
 
         this.state = {
