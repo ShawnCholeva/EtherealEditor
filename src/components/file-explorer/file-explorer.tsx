@@ -11,8 +11,8 @@ export default class FileExplorer extends Component<IFileExplorer> {
             <div className='explorer-container'>
                 <h3 className='explorer-header'>FILE EXPLORER</h3>
                 <div className='content'>
-                {this.props.fileExplorerTree !== null &&
-                    <FileExplorerItem item={this.props.fileExplorerTree.nodes[0]} isRoot={true} />
+                {this.props.fileExplorerDirectory !== null &&
+                    <FileExplorerItem item={this.props.fileExplorerDirectory.nodes[0]} isRoot={true} />
                 }
                 </div>
             </div>

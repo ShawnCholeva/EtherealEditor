@@ -1,3 +1,5 @@
+// TODO: Refactor this to component folder
+
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import { bindActionCreators } from 'redux';
@@ -10,7 +12,7 @@ class SideMenu extends Component<ISideMenu> {
     render() {
         return (
             <div>
-                <FileExplorer fileExplorerTree={this.props.fileExplorerTree}/>
+                <FileExplorer fileExplorerDirectory={this.props.fileExplorerInfo.fileExplorerDirectory}/>
             </div>
         );
     }
@@ -18,7 +20,7 @@ class SideMenu extends Component<ISideMenu> {
 
 const mapStateToProps = (state: ISideMenuState) => {
     return {
-        fileExplorerTree: state.fileExplorer
+        fileExplorerInfo: state.fileExplorer
     };
 };
 

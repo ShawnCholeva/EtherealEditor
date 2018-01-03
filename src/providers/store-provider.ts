@@ -13,11 +13,8 @@ export default class StoreProvider {
     store: IStore;
 
     constructor() {
-        let defaultState = {};
-
         this.store = createStore(
-            allReducers,
-            defaultState
+            allReducers
         );
 
         ipcRenderer.on(LOAD_FOLDER_DISPATCH_EVENT, (event: IDispatchEvent, arg: FileDirectoryTree) => {

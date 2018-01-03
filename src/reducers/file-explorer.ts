@@ -1,10 +1,19 @@
-import { FOLDER_LOADED } from '../actions/action-types';
+import { FOLDER_LOADED, FILE_SELECTED } from '../actions/action-types';
+
+const initialState = {
+    fileExplorerDirectory: null,
+    selectedFile: {
+        path: ''
+    }
+};
 
 // TODO: Figure out how to strongly type these params
-export default (state: any = null, action: any) => {
+export default (state: any = initialState, action: any) => {
     switch (action.type) {
     case FOLDER_LOADED:
-        return action.payload;
+        return { ...state, fileExplorerDirectory: action.payload };
+    case FILE_SELECTED:
+        return { ...state, selectedFile: action.payload };
     default:
         return state;
     }
