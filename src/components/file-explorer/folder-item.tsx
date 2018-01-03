@@ -1,21 +1,22 @@
 import React, { Component } from 'react';
-
-import { IFileExplorer } from '../models/interfaces/file-explorer';
-import { FileDirectoryNode } from '../models/file-directory';
-import FileExplorerItem from './file-explorer-item';
 import { Icon } from 'react-fa';
+
+import { IFileExplorer } from '../../models/interfaces/file-explorer/file-explorer';
+import { FileDirectoryNode } from '../../models/file-directory';
+import FileExplorerItem from './file-explorer-item';
 
 import './file-explorer.less';
 
 interface IFolderItem {
     folder: FileDirectoryNode;
+    isRoot: boolean;
 }
 
 interface IFolderState {
     isOpen: boolean;
 }
 
-export class FolderItem extends Component<IFolderItem, IFolderState> {
+export default class FolderItem extends Component<IFolderItem, IFolderState> {
 
     sortedChildren: FileDirectoryNode[] = new Array();
     explorerItemTextStyle = {
@@ -60,12 +61,12 @@ export class FolderItem extends Component<IFolderItem, IFolderState> {
 
         return (
             <div>
-                <div className='explorer-item' onClick={() => this.openFolder()}>
+                <div className={'explorer-item ' + (this.props.isRoot ? 'root-folder' : '')} onClick={() => this.openFolder()}>
                     <span style={this.explorerItemTextStyle}><span className='explorer-item-icon'>{folderIcon}</span>{this.props.folder.fileName}</span>
                 </div>
                 {this.state.isOpen && this.props.folder.children !== null &&
                     this.sortedChildren.map((item, index) => {
-                        return <FileExplorerItem key={index} item={item} />;
+                        return <FileExplorerItem key={index} item={item} isRoot={false}/>;
                     })
                 }
             </div>

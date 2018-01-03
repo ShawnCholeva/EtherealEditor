@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import { FileDirectoryNode } from '../models/file-directory';
+import { FileDirectoryNode } from '../../models/file-directory';
 import { Icon } from 'react-fa';
 
 import './file-explorer.less';
