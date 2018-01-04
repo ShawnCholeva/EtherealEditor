@@ -5,7 +5,7 @@ import { Icon } from 'react-fa';
 
 import { FileDirectoryNode } from '../../models/file-directory';
 import IFileItem from '../../models/interfaces/file-explorer/file-item';
-import { selectFile } from '../../actions/file-explorer';
+import { selectFile, openFile } from '../../actions/file-explorer';
 
 import './file-explorer.less';
 
@@ -16,6 +16,7 @@ class FileItem extends Component<IFileItem> {
 
     openFile() {
         this.props.selectFile(this.props.file);
+        this.props.openFile(this.props.file);
     }
 
     render() {
@@ -34,7 +35,7 @@ const mapStateToProps = (state: any) => {
 };
 
 const mapDispatchToProps = (dispatch: any) => {
-    return bindActionCreators({ selectFile: selectFile }, dispatch);
+    return bindActionCreators({ selectFile: selectFile, openFile: openFile }, dispatch);
 };
 
 export default connect<any, {}, {}, any>(mapStateToProps, mapDispatchToProps)(FileItem);
