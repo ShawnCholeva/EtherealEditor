@@ -15,7 +15,7 @@ class MenuService {
             } else {
                 let fileDirectoryTree = fileExplorerService.buildFileExplorerDirectory(fileNames[0]);
                 browserWindow.webContents.send(LOAD_FOLDER_DISPATCH_EVENT, fileDirectoryTree);
-            }
+            } 
         });
     }
 }
