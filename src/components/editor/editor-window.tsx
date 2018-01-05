@@ -13,7 +13,7 @@ class EditorWindow extends Component {
             <div className='editor-window'>
             { this.props.fileExplorerInfo.openFiles.length > 0 &&
                 <div>
-                    <EditorTabs files={this.props.fileExplorerInfo.openFiles}/>
+                    <EditorTabs files={this.props.fileExplorerInfo.openFiles} />
                     <EditorFile file={this.props.fileExplorerInfo.selectedFile}/>
                 </div>
             }

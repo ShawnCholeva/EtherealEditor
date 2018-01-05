@@ -1,4 +1,4 @@
-import { FOLDER_LOADED, FILE_SELECTED, OPEN_FILE } from '../actions/action-types';
+import { FOLDER_LOADED, FILE_SELECTED, OPEN_FILE, CLOSE_FILE } from '../actions/action-types';
 import { open } from 'original-fs';
 
 const initialState = {
@@ -17,7 +17,18 @@ export default (state: any = initialState, action: any) => {
     case FILE_SELECTED:
         return { ...state, selectedFile: action.payload };
     case OPEN_FILE:
-        state.openFiles.push(action.payload);
+        if (!state.openFiles.includes(action.payload)) {
+            state.openFiles.push(action.payload);
+        }
+
+        return { ...state, openFiles: state.openFiles };
+    case CLOSE_FILE:
+        let indexOfFileToRemove = state.openFiles.indexOf(action.payload);
+
+        if (indexOfFileToRemove > -1) {
+            state.openFiles.splice(indexOfFileToRemove, 1);
+        }
+
         return { ...state, openFiles: state.openFiles };
     default:
         return state;
