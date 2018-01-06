@@ -6,24 +6,56 @@ import { Icon } from 'react-fa';
 
 import { selectFile } from '../../../actions/file-explorer';
 import { closeFile } from '../../../actions/tabs';
+import { FileStatus } from '../../../models/enums/file-status';
 
 import './editor-tab.less';
 
 class EditorTab extends Component {
+    constructor(props: IFolderItem) {
+        super(props);
+
+        this.state = {
+            isFocused: false
+        };
+    }
+
     selectFile() {
-        this.props.selectFile(this.props.file);
+        if (this.props.file.status !== FileStatus.Closed) {
+            this.props.selectFile(this.props.file);
+        }
     }
 
     closeFile() {
+        this.props.file.status = FileStatus.Closed;
         this.props.closeFile(this.props.file);
+    }
+
+    toggleCloseIcon() {
+        this.setState({
+            isFocused: !this.state.isFocused
+        });
     }
 
     render() {
         return (
-            <div className={'editor-tab-item ' + (this.props.file.path === this.props.fileExplorerInfo.selectedFile.path ? 'selected-tab' : '')}
-                 onClick={() => { this.selectFile(); }}>
+            <div onMouseEnter={() => this.toggleCloseIcon()}
+                 onMouseLeave={() => this.toggleCloseIcon()}
+                 className={'editor-tab-item ' + (this.props.fileExplorerInfo.selectedFile !== null && this.props.file.path === this.props.fileExplorerInfo.selectedFile.path ? 'selected-tab' : '')}
+                 onClick={() => this.selectFile()}>
                 <div className='editor-tab-item-content'>
-                    <span className='editor-tab-file-icon'><Icon name='file' /></span><span>{this.props.file.fileName}</span><span className='explorer-item-close-icon' onClick={() => this.closeFile()}><Icon name='close' /></span>
+                    <span className='editor-tab-file-icon'>
+                        <Icon name='file' />
+                    </span>
+                    <span>{this.props.file.fileName}</span>
+                    {(this.props.file.path === this.props.fileExplorerInfo.selectedFile.path || this.state.isFocused) &&
+                        <span className='explorer-item-close-icon' onClick={() => this.closeFile()}>
+                            <Icon name='close' />
+                        </span>
+                    }
+                    {(this.props.file.path !== this.props.fileExplorerInfo.selectedFile.path && !this.state.isFocused) &&
+                        <span className='explorer-item-close-icon'>
+                        </span>
+                    }
                 </div>
             </div>
         );

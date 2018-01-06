@@ -24,12 +24,25 @@ export default (state: any = initialState, action: any) => {
         return { ...state, openFiles: state.openFiles };
     case CLOSE_FILE:
         let indexOfFileToRemove = state.openFiles.indexOf(action.payload);
+        let nextSelectedFile = null;
 
-        if (indexOfFileToRemove > -1) {
-            state.openFiles.splice(indexOfFileToRemove, 1);
+        let filteredOpenFiles = state.openFiles.filter((file) => {
+            return file.path !== action.payload.path;
+        });
+
+        if (action.payload.path === state.selectedFile.path) {
+            if (indexOfFileToRemove > 0) {
+                nextSelectedFile = filteredOpenFiles[indexOfFileToRemove - 1];
+            } else if (indexOfFileToRemove === 0) {
+                if (filteredOpenFiles.length > 1) {
+                    nextSelectedFile = filteredOpenFiles[indexOfFileToRemove];
+                }
+            }
+        } else {
+            nextSelectedFile = state.selectedFile;
         }
 
-        return { ...state, openFiles: state.openFiles };
+        return { ...state, openFiles: filteredOpenFiles, selectedFile: nextSelectedFile };
     default:
         return state;
     }

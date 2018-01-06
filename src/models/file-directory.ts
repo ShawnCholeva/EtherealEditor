@@ -1,3 +1,5 @@
+import { FileStatus } from './enums/file-status';
+
 export class FileDirectoryTree {
     public nodes: FileDirectoryNode[] = new Array();
 }
@@ -10,4 +12,5 @@ export class FileDirectoryNode {
     public isDirectory: boolean;
     public isRootDirectory: boolean;
     public directoryLevel: number;
+    public status: FileStatus;
 }

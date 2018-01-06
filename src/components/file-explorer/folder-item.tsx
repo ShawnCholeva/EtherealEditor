@@ -5,6 +5,7 @@ import { FileDirectoryNode } from '../../models/file-directory';
 import FileExplorerItem from './file-explorer-item';
 import IFolderItem from '../../models/interfaces/file-explorer/folder-item';
 import IFolderState from '../../models/interfaces/file-explorer/folder-state';
+import { FileStatus } from '../../models/enums/file-status';
 
 import './file-explorer.less';
 
@@ -37,9 +38,17 @@ export default class FolderItem extends Component<IFolderItem, IFolderState> {
     }
 
     openFolder() {
-        this.setState({
-            isOpen: !this.state.isOpen
-        });
+        if (this.props.folder.status === FileStatus.Open) {
+            this.props.folder.status = FileStatus.Closed;
+            this.setState({
+                isOpen: false
+            });
+        } else {
+            this.props.folder.status = FileStatus.Open;
+            this.setState({
+                isOpen: true
+            });
+        }
     }
 
     render(): any {

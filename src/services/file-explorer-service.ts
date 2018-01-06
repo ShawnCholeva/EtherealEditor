@@ -1,24 +1,33 @@
 import * as fs from 'fs';
 
 import { FileDirectoryTree, FileDirectoryNode } from '../models/file-directory';
+import { FileStatus } from '../models/enums/file-status';
 
 class FileExplorerService {
     public buildFileExplorerDirectory(directoryPath: string): FileDirectoryTree {
         let explorerDirectory: FileDirectoryTree = new FileDirectoryTree();
+
+        let rootNode = this.getRootNode(directoryPath);
+
+        explorerDirectory.nodes.push(rootNode);
+
+        return explorerDirectory;
+    }
+
+    private getRootNode(directoryPath: string): FileDirectoryNode {
+        let rootNode = new FileDirectoryNode();
         let rootDirectory = this.getLastDirectoryInFilePath(directoryPath);
 
-        let rootNode = new FileDirectoryNode();
         rootNode.isRootDirectory = true;
         rootNode.fileName = rootDirectory;
         rootNode.path = directoryPath;
         rootNode.isDirectory = true;
         rootNode.extension = null;
         rootNode.directoryLevel = 1;
+        rootNode.status = FileStatus.Closed,
         rootNode.children = this.getChildrenFilesInDirectory(rootNode.directoryLevel, directoryPath);
 
-        explorerDirectory.nodes.push(rootNode);
-
-        return explorerDirectory;
+        return rootNode;
     }
 
     private getLastDirectoryInFilePath(filePath: string): string {
@@ -40,6 +49,7 @@ class FileExplorerService {
             childNode.directoryLevel = directoryLevel + 1;
             childNode.fileName = file;
             childNode.isRootDirectory = false;
+            childNode.status = FileStatus.Closed;
 
             if (fs.lstatSync(fileDirectoryPath).isDirectory()) {
                 let directoryChildren = this.getChildrenFilesInDirectory(childNode.directoryLevel, fileDirectoryPath);
