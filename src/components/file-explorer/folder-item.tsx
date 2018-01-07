@@ -19,11 +19,11 @@ export default class FolderItem extends Component<IFolderItem, IFolderState> {
         super(props);
 
         this.state = {
-            isOpen: false
+            isOpen: this.props.folder.status === FileStatus.Open ? true : false
         };
     }
 
-    componentDidMount() {
+    sortChildren() {
         if (this.props.folder.children !== null) {
             this.sortedChildren = this.props.folder.children.sort((currentChildItem, nextChildItem): any => {
                 let child1 = currentChildItem.isDirectory;
@@ -52,6 +52,8 @@ export default class FolderItem extends Component<IFolderItem, IFolderState> {
     }
 
     render(): any {
+        this.sortChildren();
+
         let folderIcon = null;
 
         if (this.state.isOpen) {
