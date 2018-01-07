@@ -34,7 +34,7 @@ export default (state: any = initialState, action: any) => {
             if (indexOfFileToRemove > 0) {
                 nextSelectedFile = filteredOpenFiles[indexOfFileToRemove - 1];
             } else if (indexOfFileToRemove === 0) {
-                if (filteredOpenFiles.length > 1) {
+                if (filteredOpenFiles.length > 0) {
                     nextSelectedFile = filteredOpenFiles[indexOfFileToRemove];
                 }
             }
