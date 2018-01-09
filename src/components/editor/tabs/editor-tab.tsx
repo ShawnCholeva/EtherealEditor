@@ -55,7 +55,7 @@ class EditorTab extends Component {
                     <span className='editor-tab-file-icon'>
                         <Icon name='file' />
                     </span>
-                    <span className={this.state.fileStatus === FileStatus.Selected ? 'preview-tab' : ''}>{this.props.file.fileName}</span>
+                    <span className={this.props.file.status === FileStatus.Selected ? 'preview-tab' : ''}>{this.props.file.fileName}</span>
                     {(this.props.file.path === this.props.fileExplorerInfo.selectedFile.path || this.state.isFocused) &&
                         <span className='explorer-item-close-icon' onClick={() => this.closeFile()}>
                             <Icon name='close' />
