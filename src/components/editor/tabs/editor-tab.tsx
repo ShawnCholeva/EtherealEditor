@@ -63,6 +63,7 @@ class EditorTab extends Component {
                     }
                     {(this.props.file.path !== this.props.fileExplorerInfo.selectedFile.path && !this.state.isFocused) &&
                         <span className='explorer-item-close-icon'>
+                            <span className='icon-place-holder'><Icon name='close' /></span>
                         </span>
                     }
                 </div>
