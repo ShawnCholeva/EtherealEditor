@@ -4,6 +4,8 @@ import { FileStatus } from '../models/enums/file-status';
 const initialState = {
     fileExplorerDirectory: null,
     openFiles: [],
+    lastSelectedFile: {
+    },
     selectedFile: {
         path: ''
     }
@@ -15,22 +17,33 @@ export default (state: any = initialState, action: any) => {
     case FOLDER_LOADED:
         return { ...state, fileExplorerDirectory: action.payload };
     case FILE_SELECTED:
-        return { ...state, selectedFile: action.payload };
+        let lastSelectedFile = state.selectedFile;
+        return { ...state, selectedFile: action.payload, lastSelectedFile: lastSelectedFile };
     case OPEN_FILE:
-        if (!state.openFiles.includes(action.payload)) {
-            if (action.payload.status === FileStatus.Selected) {
-                let selectedFile = state.openFiles.find(file => {
-                    return file.status === FileStatus.Selected;
-                });
+        if (state.openFiles.length > 0) {
+            if (!state.openFiles.includes(action.payload)) {
+                if (action.payload.status === FileStatus.Selected) {
+                    let selectedFile = state.openFiles.find(file => {
+                        return file.status === FileStatus.Selected;
+                    });
 
-                if (selectedFile === undefined) {
-                    state.openFiles.push(action.payload);
+                    if (selectedFile === undefined) {
+                        let indexOfLastSelectedFile = state.openFiles.indexOf(state.lastSelectedFile);
+
+                        if (indexOfLastSelectedFile > -1) {
+                            state.openFiles.splice(state.openFiles.indexOf(state.lastSelectedFile) + 1, 0, action.payload);
+                        } else {
+                            state.openFiles.push(action.payload);
+                        }
+                    } else {
+                        state.openFiles.splice(state.openFiles.indexOf(selectedFile), 1, action.payload);
+                    }
                 } else {
-                    state.openFiles.splice(state.openFiles.indexOf(selectedFile), 1, action.payload);
+                    state.openFiles.push(action.payload);
                 }
-            } else {
-                state.openFiles.push(action.payload);
             }
+        } else {
+            state.openFiles.push(action.payload);
         }
 
         return { ...state, openFiles: state.openFiles };
