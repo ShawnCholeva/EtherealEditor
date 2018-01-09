@@ -1,5 +1,5 @@
 import { FOLDER_LOADED, FILE_SELECTED, OPEN_FILE, CLOSE_FILE } from '../actions/action-types';
-import { open } from 'original-fs';
+import { FileStatus } from '../models/enums/file-status';
 
 const initialState = {
     fileExplorerDirectory: null,
@@ -18,7 +18,19 @@ export default (state: any = initialState, action: any) => {
         return { ...state, selectedFile: action.payload };
     case OPEN_FILE:
         if (!state.openFiles.includes(action.payload)) {
-            state.openFiles.push(action.payload);
+            if (action.payload.status === FileStatus.Selected) {
+                let selectedFile = state.openFiles.find(file => {
+                    return file.status === FileStatus.Selected;
+                });
+
+                if (selectedFile === undefined) {
+                    state.openFiles.push(action.payload);
+                } else {
+                    state.openFiles.splice(state.openFiles.indexOf(selectedFile), 1, action.payload);
+                }
+            } else {
+                state.openFiles.push(action.payload);
+            }
         }
 
         return { ...state, openFiles: state.openFiles };

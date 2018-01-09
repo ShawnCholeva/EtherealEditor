@@ -16,14 +16,25 @@ class FileItem extends Component<IFileItem> {
     };
 
     openFile() {
+        this.props.file.status = FileStatus.Open;
         this.props.selectFile(this.props.file);
         this.props.openFile(this.props.file);
-        this.props.file.status = FileStatus.Open;
+    }
+
+    selectFile() {
+        if (this.props.file.status !== FileStatus.Open) {
+            this.props.file.status = FileStatus.Selected;
+        }
+
+        this.props.selectFile(this.props.file);
+        this.props.openFile(this.props.file);
     }
 
     render() {
         return (
-            <div onDoubleClick={() => this.openFile()} className={'explorer-item ' + (this.props.fileExplorerInfo.selectedFile !== null && this.props.file.path === this.props.fileExplorerInfo.selectedFile.path ? 'selected-file' : '')}>
+            <div onDoubleClick={() => this.openFile()}
+                 onClick={() => this.selectFile()}
+                 className={'explorer-item ' + (this.props.fileExplorerInfo.selectedFile !== null && this.props.file.path === this.props.fileExplorerInfo.selectedFile.path ? 'selected-file' : '')}>
                 <span style={this.explorerItemTextStyle}><span className='explorer-item-icon'><Icon name='file' /></span>{this.props.file.fileName}</span>
             </div>
         );
