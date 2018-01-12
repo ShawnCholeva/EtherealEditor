@@ -19,5 +19,15 @@ export const template: Electron.MenuItemConstructorOptions[] = [
             { role: 'copy' },
             { role: 'paste' }
         ]
+    },
+    {
+        label: 'View',
+        submenu: [
+            { role: 'togglefullscreen' },
+            { type: 'separator' },
+            { role: 'zoomin' },
+            { role: 'zoomout' },
+            { role: 'resetzoom' }
+        ]
     }
 ];
