@@ -50,6 +50,7 @@ class FileExplorerService {
             childNode.fileName = file;
             childNode.isRootDirectory = false;
             childNode.status = FileStatus.Closed;
+            childNode.path = fileDirectoryPath;
 
             if (fs.lstatSync(fileDirectoryPath).isDirectory()) {
                 let directoryChildren = this.getChildrenFilesInDirectory(childNode.directoryLevel, fileDirectoryPath);
@@ -57,7 +58,6 @@ class FileExplorerService {
                 childNode.extension = null;
                 childNode.isDirectory = true;
                 childNode.children = directoryChildren;
-                childNode.path = fileDirectoryPath;
 
                 children.push(childNode);
             } else {
@@ -67,7 +67,6 @@ class FileExplorerService {
                 childNode.extension = extension;
                 childNode.isDirectory = false;
                 childNode.children = null;
-                childNode.path = fileDirectoryPath;
 
                 children.push(childNode);
             }

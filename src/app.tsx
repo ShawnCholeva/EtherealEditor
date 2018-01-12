@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 
-import SideMenu from './containers/side-menu';
-import EditorWindow from './components/editor/editor-window';
+import SideMenu from './components/side-menu';
+import EditorWindow from './components/editor-window';
 
 import './app.less';
 
