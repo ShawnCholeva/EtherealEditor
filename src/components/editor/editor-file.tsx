@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import { connect } from 'react-redux';
+import { IEditorFile } from '../../models/interfaces/tabs/editor-file';
 
-class EditorFile extends Component {
+class EditorFile extends Component<IEditorFile> {
     render() {
         return (
             <div>

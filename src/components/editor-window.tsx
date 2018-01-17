@@ -6,12 +6,14 @@ import EditorFile from './editor/editor-file';
 import EditorTabs from './editor/tabs/editor-tabs';
 
 import './editor-window.less';
+import { IEditorWindow } from '../models/interfaces/editor-window';
 
-class EditorWindow extends Component {
+// TODO: Rename this class to MainWindow
+class EditorWindow extends Component<IEditorWindow> {
     render() {
         return (
             <div className='editor-window'>
-            { this.props.fileExplorerInfo.openFiles.length > 0 &&
+            { this.props.fileExplorerInfo !== null && this.props.fileExplorerInfo.openFiles.length > 0 &&
                 <div>
                     <EditorTabs files={this.props.fileExplorerInfo.openFiles} />
                     <EditorFile file={this.props.fileExplorerInfo.selectedFile}/>

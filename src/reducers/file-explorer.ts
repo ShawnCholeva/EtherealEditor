@@ -1,18 +1,17 @@
 import { FOLDER_LOADED, FILE_SELECTED, OPEN_FILE, CLOSE_FILE } from '../actions/action-types';
 import { FileStatus } from '../models/enums/file-status';
+import { FileDirectoryNode } from '../models/file-directory';
+import FileExplorerReducerState from '../models/reducers/file-explorer/file-explorer-state';
+import FileExplorerReducerAction from '../models/reducers/file-explorer/file-explorer-action';
 
-const initialState = {
+const initialState: FileExplorerReducerState = {
     fileExplorerDirectory: null,
-    openFiles: [],
-    lastSelectedFile: {
-    },
-    selectedFile: {
-        path: ''
-    }
+    openFiles: new Array(),
+    lastSelectedFile: new FileDirectoryNode(),
+    selectedFile: new FileDirectoryNode()
 };
 
-// TODO: Figure out how to strongly type these params
-export default (state: any = initialState, action: any) => {
+export default (state: FileExplorerReducerState = initialState, action: FileExplorerReducerAction) => {
     switch (action.type) {
     case FOLDER_LOADED:
         return { ...state, fileExplorerDirectory: action.payload };

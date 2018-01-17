@@ -5,8 +5,9 @@ import { connect } from 'react-redux';
 import EditorTab from './editor-tab';
 
 import './editor-tabs.less';
+import { IEditorTabs } from '../../../models/interfaces/tabs/editor-tabs';
 
-export default class EditorTabs extends Component {
+export default class EditorTabs extends Component<IEditorTabs> {
     render() {
         return (
             <div className='editor-tabs-container'>

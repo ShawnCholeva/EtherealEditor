@@ -5,12 +5,12 @@ export class FileDirectoryTree {
 }
 
 export class FileDirectoryNode {
-    public fileName: string;
-    public extension: string | null;
-    public path: string;
+    public fileName: string = '';
+    public extension: string | null = null;
+    public path: string = '';
     public children: FileDirectoryNode[] | null = null;
-    public isDirectory: boolean;
-    public isRootDirectory: boolean;
-    public directoryLevel: number;
-    public status: FileStatus;
+    public isDirectory: boolean = false;
+    public isRootDirectory: boolean = false;
+    public directoryLevel: number = 0;
+    public status: FileStatus | null = null;
 }

@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import { bindActionCreators } from 'redux';
+import { bindActionCreators, Dispatch } from 'redux';
 import { connect } from 'react-redux';
 import { Icon } from 'react-fa';
 
@@ -9,9 +9,11 @@ import { closeFile } from '../../../actions/tabs';
 import { FileStatus } from '../../../models/enums/file-status';
 
 import './editor-tab.less';
+import { IEditorTabProps, IEditorTabState, IEditorTabReduxState } from '../../../models/interfaces/tabs/editor-tab';
+import IFolderItem from '../../../models/interfaces/file-explorer/folder-item';
 
-class EditorTab extends Component {
-    constructor(props: IFolderItem) {
+class EditorTab extends Component<IEditorTabProps, IEditorTabState> {
+    constructor(props: IEditorTabProps) {
         super(props);
 
         this.state = {
@@ -72,14 +74,14 @@ class EditorTab extends Component {
     }
 }
 
-const mapStateToProps = (state: any) => {
+const mapStateToProps = (state: IEditorTabReduxState) => {
     return {
         fileExplorerInfo: state.fileExplorer
     };
 };
 
-const mapDispatchToProps = (dispatch: any) => {
+const mapDispatchToProps = (dispatch: Dispatch) => {
     return bindActionCreators({ selectFile: selectFile, closeFile: closeFile }, dispatch);
 };
 
-export default connect<any, {}, {}, any>(mapStateToProps, mapDispatchToProps)(EditorTab);
+export default connect<{}, {}, IEditorTabProps, IEditorTabReduxState>(mapStateToProps, mapDispatchToProps)(EditorTab);
