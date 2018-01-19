@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 
 import SideMenu from './components/side-menu';
-import EditorWindow from './components/editor-window';
+import MainWindow from './components/main-window';
 
 import './app.less';
 
@@ -13,8 +13,8 @@ class App extends Component {
                 <div className='side-menu-container'>
                     <SideMenu />
                 </div>
-                <div className='editor-window-container'>
-                    <EditorWindow />
+                <div className='main-window-container'>
+                    <MainWindow />
                 </div>
             </div>
         );

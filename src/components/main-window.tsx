@@ -5,14 +5,14 @@ import { connect } from 'react-redux';
 import EditorFile from './editor/editor-file';
 import EditorTabs from './editor/tabs/editor-tabs';
 
-import './editor-window.less';
-import { IEditorWindow } from '../models/interfaces/editor-window';
+import './main-window.less';
+import { IMainWindow } from '../models/interfaces/main-window';
 
 // TODO: Rename this class to MainWindow
-class EditorWindow extends Component<IEditorWindow> {
+class MainWindow extends Component<IMainWindow> {
     render() {
         return (
-            <div className='editor-window'>
+            <div className='main-window'>
             { this.props.fileExplorerInfo !== null && this.props.fileExplorerInfo.openFiles.length > 0 &&
                 <div>
                     <EditorTabs files={this.props.fileExplorerInfo.openFiles} />
@@ -30,4 +30,4 @@ const mapStateToProps = (state: any) => {
     };
 };
 
-export default connect<any, {}, {}, any>(mapStateToProps)(EditorWindow);
+export default connect<any, {}, null, any>(mapStateToProps)(MainWindow);

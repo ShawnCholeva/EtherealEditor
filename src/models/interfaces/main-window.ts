@@ -1,5 +1,5 @@
 import FileExplorerReducerState from '../reducers/file-explorer/file-explorer-state';
 
-export interface IEditorWindow {
+export interface IMainWindow {
     fileExplorerInfo: FileExplorerReducerState;
 }
