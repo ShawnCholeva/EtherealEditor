@@ -14,7 +14,11 @@ export default class EditorTabs extends Component<IEditorTabs> {
             <div className='editor-tabs-container'>
                 {this.props.files.length > 0 &&
                     this.props.files.map((item: FileDirectoryNode, index: number) => {
-                        return <EditorTab key={index} file={item} />;
+                        return (
+                                <div key={index}>
+                                    <EditorTab file={item} />
+                                </div>
+                        );
                     })
                 }
             </div>

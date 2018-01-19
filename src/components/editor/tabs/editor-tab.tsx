@@ -9,7 +9,7 @@ import { closeFile } from '../../../actions/tabs';
 import { FileStatus } from '../../../models/enums/file-status';
 
 import './editor-tab.less';
-import { IEditorTabProps, IEditorTabState, IEditorTabReduxState } from '../../../models/interfaces/tabs/editor-tab';
+import { IEditorTabProps, IEditorTabState, IEditorTabReduxState, IEditorTabPassedProps, IEditorTabDispatchProps, IEditorTabReduxProps } from '../../../models/interfaces/tabs/editor-tab';
 import IFolderItem from '../../../models/interfaces/file-explorer/folder-item';
 
 class EditorTab extends Component<IEditorTabProps, IEditorTabState> {
@@ -84,4 +84,4 @@ const mapDispatchToProps = (dispatch: Dispatch) => {
     return bindActionCreators({ selectFile: selectFile, closeFile: closeFile }, dispatch);
 };
 
-export default connect<{}, {}, IEditorTabProps, IEditorTabReduxState>(mapStateToProps, mapDispatchToProps)(EditorTab);
+export default connect<IEditorTabReduxProps, IEditorTabDispatchProps, IEditorTabPassedProps, IEditorTabReduxState>(mapStateToProps, mapDispatchToProps)(EditorTab);

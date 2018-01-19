@@ -9,11 +9,24 @@ export interface IEditorTabProps {
     closeFile: (file: FileDirectoryNode) => void;
 }
 
+export interface IEditorTabPassedProps {
+    file: FileDirectoryNode;
+}
+
+export interface IEditorTabReduxProps {
+    fileExplorerInfo: FileExplorerReducerState;
+}
+
+export interface IEditorTabDispatchProps {
+    selectFile: (file: FileDirectoryNode) => void;
+    closeFile: (file: FileDirectoryNode) => void;
+}
+
 export interface IEditorTabState {
     isFocused: boolean;
     fileStatus: FileStatus | null;
 }
 
 export interface IEditorTabReduxState {
-    fileExplorer: FileDirectoryTree;
+    fileExplorer: FileExplorerReducerState;
 }
