@@ -8,7 +8,6 @@ import EditorTabs from './editor/tabs/editor-tabs';
 import './main-window.less';
 import { IMainWindow } from '../models/interfaces/main-window';
 
-// TODO: Rename this class to MainWindow
 class MainWindow extends Component<IMainWindow> {
     render() {
         return (
@@ -30,4 +29,4 @@ const mapStateToProps = (state: any) => {
     };
 };
 
-export default connect<any, {}, null, any>(mapStateToProps)(MainWindow);
+export default connect<IMainWindow, null, null, any>(mapStateToProps)(MainWindow);

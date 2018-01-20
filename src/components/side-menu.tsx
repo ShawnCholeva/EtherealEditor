@@ -20,10 +20,10 @@ class SideMenu extends Component<ISideMenu, {}> {
     }
 }
 
-const mapStateToProps = (state: ISideMenuReduxState) => {
+const mapStateToProps = (state: any) => {
     return {
         fileExplorerInfo: state.fileExplorer
     };
 };
 
-export default connect<{}, {}, ISideMenu, ISideMenuReduxState>(mapStateToProps, {})(SideMenu);
+export default connect<ISideMenu, null, null, any>(mapStateToProps)(SideMenu);

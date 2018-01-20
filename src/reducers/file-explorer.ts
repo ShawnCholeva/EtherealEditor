@@ -2,7 +2,6 @@ import { FOLDER_LOADED, FILE_SELECTED, OPEN_FILE, CLOSE_FILE } from '../actions/
 import { FileStatus } from '../models/enums/file-status';
 import { FileDirectoryNode } from '../models/file-directory';
 import FileExplorerReducerState from '../models/reducers/file-explorer/file-explorer-state';
-import FileExplorerReducerAction from '../models/reducers/file-explorer/file-explorer-action';
 
 const initialState: FileExplorerReducerState = {
     fileExplorerDirectory: null,
@@ -11,7 +10,7 @@ const initialState: FileExplorerReducerState = {
     selectedFile: new FileDirectoryNode()
 };
 
-export default (state: FileExplorerReducerState = initialState, action: FileExplorerReducerAction) => {
+export default (state: any = initialState, action: any) => {
     switch (action.type) {
     case FOLDER_LOADED:
         return { ...state, fileExplorerDirectory: action.payload };
@@ -22,7 +21,7 @@ export default (state: FileExplorerReducerState = initialState, action: FileExpl
         if (state.openFiles.length > 0) {
             if (!state.openFiles.includes(action.payload)) {
                 if (action.payload.status === FileStatus.Selected) {
-                    let selectedFile = state.openFiles.find(file => {
+                    let selectedFile = state.openFiles.find((file: FileDirectoryNode) => {
                         return file.status === FileStatus.Selected;
                     });
 
@@ -50,7 +49,7 @@ export default (state: FileExplorerReducerState = initialState, action: FileExpl
         let indexOfFileToRemove = state.openFiles.indexOf(action.payload);
         let nextSelectedFile = null;
 
-        let filteredOpenFiles = state.openFiles.filter((file) => {
+        let filteredOpenFiles = state.openFiles.filter((file: FileDirectoryNode) => {
             return file.path !== action.payload.path;
         });
 
