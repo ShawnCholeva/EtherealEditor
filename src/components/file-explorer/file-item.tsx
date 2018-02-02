@@ -4,11 +4,13 @@ import { connect } from 'react-redux';
 import { Icon } from 'react-fa';
 
 import { FileDirectoryNode } from '../../models/file-directory';
-import { IFileItemProps, IFileItemDispatchProps, IFilePassedProps, IFileItemReduxProps, IFileItemReduxState } from '../../models/interfaces/file-explorer/file-item';
+import { IFileItemProps, IFileItemDispatchProps, IFilePassedProps } from '../../models/interfaces/file-explorer/file-item';
 import { selectFile, openFile } from '../../actions/file-explorer';
 import { FileStatus } from '../../models/enums/file-status';
 
 import './file-explorer.less';
+import { IFileExplorerReducer } from '../../models/interfaces/reducers/filer-explorer-reducer-interface';
+import { IReduxState } from '../../models/interfaces/redux-state';
 
 class FileItem extends Component<IFileItemProps & IFileItemDispatchProps> {
     explorerItemTextStyle = {
@@ -41,7 +43,7 @@ class FileItem extends Component<IFileItemProps & IFileItemDispatchProps> {
     }
 }
 
-const mapStateToProps = (state: IFileItemReduxState): IFileItemReduxProps => {
+const mapStateToProps = (state: IReduxState): IFileExplorerReducer => {
     return {
         fileExplorerInfo: state.fileExplorer
     };
@@ -51,4 +53,4 @@ const mapDispatchToProps = (dispatch: Dispatch): IFileItemDispatchProps => {
     return bindActionCreators({ selectFile: selectFile, openFile: openFile }, dispatch);
 };
 
-export default connect<IFileItemReduxProps, IFileItemDispatchProps, IFilePassedProps, IFileItemReduxState>(mapStateToProps, mapDispatchToProps)(FileItem);
+export default connect<IFileExplorerReducer, IFileItemDispatchProps, IFilePassedProps, IReduxState>(mapStateToProps, mapDispatchToProps)(FileItem);

@@ -4,8 +4,8 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 import FileExplorer from '../components/file-explorer/file-explorer';
-import { ISideMenu, ISideMenuReduxState } from '../models/interfaces/side-menu';
-import FileExplorerReducerState from '../models/reducers/file-explorer/file-explorer-state';
+import { ISideMenuReduxState, ISideMenu } from '../models/interfaces/side-menu';
+import { FileExplorerReducerState } from '../models/reducers/file-explorer-reducer-model';
 import { FileDirectoryTree } from '../models/file-directory';
 
 class SideMenu extends Component<ISideMenu, {}> {

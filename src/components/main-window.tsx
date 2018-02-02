@@ -7,6 +7,7 @@ import EditorTabs from './editor/tabs/editor-tabs';
 
 import './main-window.less';
 import { IMainWindow } from '../models/interfaces/main-window';
+import { IReduxState } from '../models/interfaces/redux-state';
 
 class MainWindow extends Component<IMainWindow> {
     render() {
@@ -23,10 +24,10 @@ class MainWindow extends Component<IMainWindow> {
     }
 }
 
-const mapStateToProps = (state: any) => {
+const mapStateToProps = (state: IReduxState) => {
     return {
         fileExplorerInfo: state.fileExplorer
     };
 };
 
-export default connect<IMainWindow, null, null, any>(mapStateToProps)(MainWindow);
+export default connect<IMainWindow, null, null, IReduxState>(mapStateToProps)(MainWindow);

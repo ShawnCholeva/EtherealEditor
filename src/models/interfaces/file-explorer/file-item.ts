@@ -1,5 +1,5 @@
 import { FileDirectoryNode, FileDirectoryTree } from '../../file-directory';
-import FileExplorerReducerState from '../../reducers/file-explorer/file-explorer-state';
+import { FileExplorerReducerState } from '../../reducers/file-explorer-reducer-model';
 
 export interface IFileItemProps {
     file: FileDirectoryNode;
@@ -10,14 +10,6 @@ export interface IFileItemProps {
 
 export interface IFilePassedProps {
     file: FileDirectoryNode;
-}
-
-export interface IFileItemReduxState {
-    fileExplorer: FileExplorerReducerState;
-}
-
-export interface IFileItemReduxProps {
-    fileExplorerInfo: FileExplorerReducerState;
 }
 
 export interface IFileItemDispatchProps {

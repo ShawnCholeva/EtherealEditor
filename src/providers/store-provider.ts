@@ -17,7 +17,7 @@ export default class StoreProvider {
             allReducers
         );
 
-        ipcRenderer.on(LOAD_FOLDER_DISPATCH_EVENT, (event: IDispatchEvent, arg: FileDirectoryTree) => {
+        ipcRenderer.on(LOAD_FOLDER_DISPATCH_EVENT, (event: IDispatchEvent, arg: FileDirectoryTree): void => {
             this.store.dispatch(loadFolder(arg));
         });
     }

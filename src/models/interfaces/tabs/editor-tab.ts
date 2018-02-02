@@ -1,6 +1,6 @@
 import { FileDirectoryNode, FileDirectoryTree } from '../../file-directory';
 import { FileStatus } from '../../enums/file-status';
-import FileExplorerReducerState from '../../reducers/file-explorer/file-explorer-state';
+import { FileExplorerReducerState } from '../../reducers/file-explorer-reducer-model';
 
 export interface IEditorTabProps {
     file: FileDirectoryNode;
@@ -25,8 +25,4 @@ export interface IEditorTabDispatchProps {
 export interface IEditorTabState {
     isFocused: boolean;
     fileStatus: FileStatus | null;
-}
-
-export interface IEditorTabReduxState {
-    fileExplorer: FileExplorerReducerState;
 }

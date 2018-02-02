@@ -9,7 +9,7 @@ import './app.less';
 class App extends Component {
     render() {
         return (
-            <div className='main-window-container'>
+            <div className='app-window-container'>
                 <div className='side-menu-container'>
                     <SideMenu />
                 </div>

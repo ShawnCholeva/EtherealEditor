@@ -1,11 +1,11 @@
 import { FOLDER_LOADED, FILE_SELECTED, OPEN_FILE, CLOSE_FILE } from '../actions/action-types';
-import { FileStatus } from '../models/enums/file-status';
 import { FileDirectoryNode } from '../models/file-directory';
-import FileExplorerReducerState from '../models/reducers/file-explorer/file-explorer-state';
+import { FileExplorerReducerState } from '../models/reducers/file-explorer-reducer-model';
+import fileExplorerReducerService from '../services/reducers/file-explorer-reducer-service';
 
 const initialState: FileExplorerReducerState = {
     fileExplorerDirectory: null,
-    openFiles: new Array(),
+    openFiles: new Array<FileDirectoryNode>(),
     lastSelectedFile: new FileDirectoryNode(),
     selectedFile: new FileDirectoryNode()
 };
@@ -18,54 +18,11 @@ export default (state: any = initialState, action: any) => {
         let lastSelectedFile = state.selectedFile;
         return { ...state, selectedFile: action.payload, lastSelectedFile: lastSelectedFile };
     case OPEN_FILE:
-        if (state.openFiles.length > 0) {
-            if (!state.openFiles.includes(action.payload)) {
-                if (action.payload.status === FileStatus.Selected) {
-                    let selectedFile = state.openFiles.find((file: FileDirectoryNode) => {
-                        return file.status === FileStatus.Selected;
-                    });
-
-                    if (selectedFile === undefined) {
-                        let indexOfLastSelectedFile = state.openFiles.indexOf(state.lastSelectedFile);
-
-                        if (indexOfLastSelectedFile > -1) {
-                            state.openFiles.splice(state.openFiles.indexOf(state.lastSelectedFile) + 1, 0, action.payload);
-                        } else {
-                            state.openFiles.push(action.payload);
-                        }
-                    } else {
-                        state.openFiles.splice(state.openFiles.indexOf(selectedFile), 1, action.payload);
-                    }
-                } else {
-                    state.openFiles.push(action.payload);
-                }
-            }
-        } else {
-            state.openFiles.push(action.payload);
-        }
-
-        return { ...state, openFiles: state.openFiles };
+        let openFileResponse = fileExplorerReducerService.openFile(state, action);
+        return { ...state, openFiles: openFileResponse.openFiles };
     case CLOSE_FILE:
-        let indexOfFileToRemove = state.openFiles.indexOf(action.payload);
-        let nextSelectedFile = null;
-
-        let filteredOpenFiles = state.openFiles.filter((file: FileDirectoryNode) => {
-            return file.path !== action.payload.path;
-        });
-
-        if (action.payload.path === state.selectedFile.path) {
-            if (indexOfFileToRemove > 0) {
-                nextSelectedFile = filteredOpenFiles[indexOfFileToRemove - 1];
-            } else if (indexOfFileToRemove === 0) {
-                if (filteredOpenFiles.length > 0) {
-                    nextSelectedFile = filteredOpenFiles[indexOfFileToRemove];
-                }
-            }
-        } else {
-            nextSelectedFile = state.selectedFile;
-        }
-
-        return { ...state, openFiles: filteredOpenFiles, selectedFile: nextSelectedFile };
+        let closeFileResponse = fileExplorerReducerService.closeFile(state,action);
+        return { ...state, openFiles: closeFileResponse.filteredOpenFiles, selectedFile: closeFileResponse.nextSelectedFile };
     default:
         return state;
     }
