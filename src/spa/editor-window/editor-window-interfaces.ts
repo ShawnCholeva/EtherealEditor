@@ -1,9 +1,9 @@
-import { FileExplorerReducerState } from '../shared/file-directory/file-directory-reducer-models';
+import { FileDirectoryReducerState } from '../shared/file-directory/file-directory-reducer-models';
 
 export interface IEditorWindow {
-    fileExplorerInfo: FileExplorerReducerState;
+    fileExplorerInfo: FileDirectoryReducerState;
 }
 
 export interface IEditorWindowReduxProps {
-    fileExplorerInfo: FileExplorerReducerState;
+    fileExplorerInfo: FileDirectoryReducerState;
 }

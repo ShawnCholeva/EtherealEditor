@@ -1,9 +1,9 @@
 import { FileDirectoryNode } from '../file-directory/file-directory-models';
-import { FileExplorerReducerState, FileExplorerReducerAction, FileExplorerReducerCloseFileResponse } from '../file-directory/file-directory-reducer-models';
+import { FileDirectoryReducerState, FileDirectoryReducerAction, FileDirectoryReducerCloseFileResponse } from '../file-directory/file-directory-reducer-models';
 import { FileStatus } from '../enums/file-status';
 
-class FileExplorerReducerService {
-    openFile(state: FileExplorerReducerState, action: FileExplorerReducerAction): FileExplorerReducerState {
+class FileDirectoryReducerService {
+    openFile(state: FileDirectoryReducerState, action: FileDirectoryReducerAction): FileDirectoryReducerState {
         if (state.openFiles.length > 0) {
             if (!state.openFiles.includes(action.payload)) {
                 if (action.payload.status === FileStatus.Selected) {
@@ -33,7 +33,7 @@ class FileExplorerReducerService {
         return state;
     }
 
-    closeFile(state: FileExplorerReducerState, action: FileExplorerReducerAction): FileExplorerReducerCloseFileResponse {
+    closeFile(state: FileDirectoryReducerState, action: FileDirectoryReducerAction): FileDirectoryReducerCloseFileResponse {
         let indexOfFileToRemove = state.openFiles.indexOf(action.payload);
         let nextSelectedFile = null;
 
@@ -57,5 +57,5 @@ class FileExplorerReducerService {
     }
 }
 
-let fileExplorerReducerService = new FileExplorerReducerService();
-export default fileExplorerReducerService;
+let fileDirectoryReducerService = new FileDirectoryReducerService();
+export default fileDirectoryReducerService;

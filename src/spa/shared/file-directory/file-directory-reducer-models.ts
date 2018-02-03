@@ -1,18 +1,18 @@
 import { FileDirectoryNode, FileDirectoryTree } from '../file-directory/file-directory-models';
 
-export class FileExplorerReducerState {
+export class FileDirectoryReducerState {
     fileExplorerDirectory: FileDirectoryTree | null;
     openFiles: FileDirectoryNode[];
     lastSelectedFile: FileDirectoryNode;
     selectedFile: FileDirectoryNode;
 }
 
-export class FileExplorerReducerAction {
+export class FileDirectoryReducerAction {
     type: string;
     payload: FileDirectoryNode;
 }
 
-export class FileExplorerReducerCloseFileResponse {
+export class FileDirectoryReducerCloseFileResponse {
     filteredOpenFiles: FileDirectoryNode[];
     nextSelectedFile: FileDirectoryNode | null;
 }

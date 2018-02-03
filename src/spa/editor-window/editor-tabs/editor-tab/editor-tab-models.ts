@@ -1,10 +1,10 @@
 import { FileDirectoryNode, FileDirectoryTree } from '../../../shared/file-directory/file-directory-models';
 import { FileStatus } from '../../../shared/enums/file-status';
-import { FileExplorerReducerState } from '../../../shared/file-directory/file-directory-reducer-models';
+import { FileDirectoryReducerState } from '../../../shared/file-directory/file-directory-reducer-models';
 
 export interface IEditorTabProps {
     file: FileDirectoryNode;
-    fileExplorerInfo: FileExplorerReducerState;
+    fileExplorerInfo: FileDirectoryReducerState;
     selectFile: (file: FileDirectoryNode) => void;
     closeFile: (file: FileDirectoryNode) => void;
 }
@@ -14,7 +14,7 @@ export interface IEditorTabPassedProps {
 }
 
 export interface IEditorTabReduxProps {
-    fileExplorerInfo: FileExplorerReducerState;
+    fileExplorerInfo: FileDirectoryReducerState;
 }
 
 export interface IEditorTabDispatchProps {

@@ -1,15 +1,15 @@
 import { FileDirectoryNode, FileDirectoryTree } from '../../../../shared/file-directory/file-directory-models';
-import { FileExplorerReducerState } from '../../../../shared/file-directory/file-directory-reducer-models';
+import { FileDirectoryReducerState } from '../../../../shared/file-directory/file-directory-reducer-models';
 
 export interface IFileItemProps {
     file: FileDirectoryNode;
-    fileExplorerInfo: FileExplorerReducerState;
+    fileExplorerInfo: FileDirectoryReducerState;
     selectFile: (file: FileDirectoryNode) => void;
     openFile: (file: FileDirectoryNode) => void;
 }
 
 export interface IFileExplorerReducer {
-    fileExplorerInfo: FileExplorerReducerState | null;
+    fileExplorerInfo: FileDirectoryReducerState | null;
 }
 
 export interface IFilePassedProps {

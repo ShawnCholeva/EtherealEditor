@@ -5,7 +5,6 @@ import { connect } from 'react-redux';
 
 import FileExplorer from '../side-menu/file-explorer/file-explorer';
 import { ISideMenu, ISideMenuReduxProps } from './side-menu-interfaces';
-import { FileExplorerReducerState } from '../shared/file-directory/file-directory-reducer-models';
 import { FileDirectoryTree } from '../shared/file-directory/file-directory-models';
 import { IReduxState } from '../shared/interfaces/redux-state';
 

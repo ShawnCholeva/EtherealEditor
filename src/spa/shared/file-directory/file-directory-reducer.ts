@@ -1,9 +1,9 @@
 import { FOLDER_LOADED, FILE_SELECTED, OPENED_FILE, CLOSED_FILE } from '../actions/action-types';
 import { FileDirectoryNode } from '../file-directory/file-directory-models';
-import { FileExplorerReducerState } from '../file-directory/file-directory-reducer-models';
+import { FileDirectoryReducerState } from '../file-directory/file-directory-reducer-models';
 import fileExplorerReducerService from '../file-directory/file-directory-reducer-service';
 
-const initialState: FileExplorerReducerState = {
+const initialState: FileDirectoryReducerState = {
     fileExplorerDirectory: null,
     openFiles: new Array<FileDirectoryNode>(),
     lastSelectedFile: new FileDirectoryNode(),
