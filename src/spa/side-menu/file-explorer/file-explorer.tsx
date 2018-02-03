@@ -10,11 +10,13 @@ export default class FileExplorer extends Component<IFileExplorer> {
 
     render() {
         return (
-            <div>
+            <div className='file-explorer-wrapper'>
                 <h3 className='explorer-header'>{this.header}</h3>
-                {this.props.fileExplorerDirectory !== null &&
-                    <FileExplorerItem item={this.props.fileExplorerDirectory.nodes[0]} isRoot={true} />
-                }
+                <div className='file-explorer-content'>
+                    {this.props.fileExplorerDirectory !== null &&
+                        <FileExplorerItem item={this.props.fileExplorerDirectory.nodes[0]} isRoot={true} />
+                    }
+                </div>
             </div>
         );
     }

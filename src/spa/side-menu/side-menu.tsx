@@ -8,10 +8,12 @@ import { ISideMenu, ISideMenuReduxProps } from './side-menu-interfaces';
 import { FileDirectoryTree } from '../shared/file-directory/file-directory-models';
 import { IReduxState } from '../shared/interfaces/redux-state';
 
+import './side-menu.less';
+
 class SideMenu extends Component<ISideMenu> {
     render() {
         return (
-            <div>
+            <div className='side-menu-wrapper'>
                 {this.props.fileExplorerInfo !== null &&
                     <FileExplorer fileExplorerDirectory={this.props.fileExplorerInfo.fileExplorerDirectory}/>
                 }
