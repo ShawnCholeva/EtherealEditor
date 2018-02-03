@@ -2,9 +2,9 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux';
 
-import allReducers from './reducers/index';
+import allReducers from './spa/shared/reducers/index';
 import App from './app';
-import StoreProvider from './providers/store-provider';
+import StoreProvider from './main/providers/store-provider';
 
 const bootstrapperElement: HTMLElement = document.getElementById('app') as HTMLElement;
 

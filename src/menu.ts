@@ -1,4 +1,4 @@
-import menuService from './services/menu-service';
+import menuService from './main/services/menu-service';
 
 export const template: Electron.MenuItemConstructorOptions[] = [
     {
