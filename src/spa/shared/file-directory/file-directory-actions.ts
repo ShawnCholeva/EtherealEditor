@@ -1,5 +1,5 @@
 import { FOLDER_LOADED, FILE_SELECTED, OPENED_FILE, CLOSED_FILE } from '../actions/action-types';
-import { FileDirectoryTree, FileDirectoryNode } from '../file-directory/file-directory-structure';
+import { FileDirectoryTree, FileDirectoryNode } from '../file-directory/file-directory-models';
 import Action from '../interfaces/action';
 
 export const loadFolder = (fileDirectoryTree: FileDirectoryTree): Action<FileDirectoryTree> => {

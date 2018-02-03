@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 
-import { FileDirectoryNode } from '../../../shared/file-directory/file-directory-structure';
-import IFileExplorerItem from './file-explorer-item-models';
+import { FileDirectoryNode } from '../../../shared/file-directory/file-directory-models';
+import { IFileExplorerItem } from './file-explorer-item-interfaces';
 import FileItem from './file-item/file-item';
 import FolderItem from './folder-item/folder-item';
 
@@ -17,10 +17,8 @@ export default class FileExplorerItem extends Component<IFileExplorerItem> {
             explorerItem = <FileItem file={this.props.item} />;
         }
 
-        return (<div className='file-explorer-item-container'>
-                    <div className='file-explorer-item'>
-                        {explorerItem}
-                    </div>
+        return (<div>
+                    {explorerItem}
                 </div>
         );
     }

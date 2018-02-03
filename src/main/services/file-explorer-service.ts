@@ -1,6 +1,6 @@
 import * as fs from 'fs';
 
-import { FileDirectoryTree, FileDirectoryNode } from '../../spa/shared/file-directory/file-directory-structure';
+import { FileDirectoryTree, FileDirectoryNode } from '../../spa/shared/file-directory/file-directory-models';
 import { FileStatus } from '../../spa/shared/enums/file-status';
 
 class FileExplorerService {

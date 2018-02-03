@@ -4,9 +4,10 @@ import { createStore, Store } from 'redux';
 import allReducers from '../../spa/shared/reducers/index';
 import { loadFolder } from '../../spa/shared/file-directory/file-directory-actions';
 import { IDispatchEvent } from '../models/interfaces/dispatch-events';
-import { FileDirectoryTree } from '../../spa/shared/file-directory/file-directory-structure';
+import { FileDirectoryTree } from '../../spa/shared/file-directory/file-directory-models';
 import { LOAD_FOLDER_DISPATCH_EVENT } from '../constants/dispatch-event-types';
 
+// TODO: Can we strongly type the redux store type?
 export interface IStore extends Store<any> {
 }
 

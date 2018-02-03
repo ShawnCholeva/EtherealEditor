@@ -1,6 +1,10 @@
-import { FileDirectoryNode } from '../../../../shared/file-directory/file-directory-structure';
+import { FileDirectoryNode } from '../../../../shared/file-directory/file-directory-models';
 
-export default interface IFolderItem {
+export interface IFolderItem {
     folder: FileDirectoryNode;
     isRoot: boolean;
+}
+
+export interface IFolderState {
+    isOpen: boolean;
 }

@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import { connect } from 'react-redux';
 
-import { IEditorFile } from './editor-file-interfaces';
+import { IEditorFile, IEditorFilePassedProps, IEditorFileReduxProps } from './editor-file-interfaces';
+import { IReduxState } from '../../shared/interfaces/redux-state';
 
 class EditorFile extends Component<IEditorFile> {
     render() {
@@ -14,10 +15,10 @@ class EditorFile extends Component<IEditorFile> {
     }
 }
 
-const mapStateToProps = (state: any) => {
+const mapStateToProps = (state: IReduxState): IEditorFileReduxProps => {
     return {
         fileExplorerInfo: state.fileExplorer
     };
 };
 
-export default connect<any, {}, {}, any>(mapStateToProps)(EditorFile);
+export default connect<IEditorFileReduxProps, null, IEditorFilePassedProps, IReduxState>(mapStateToProps)(EditorFile);

@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import EditorTab from './editor-tab/editor-tab';
 
 import './editor-tabs.less';
-import { FileDirectoryNode } from '../../shared/file-directory/file-directory-structure';
+import { FileDirectoryNode } from '../../shared/file-directory/file-directory-models';
 import { IEditorTabs } from './editor-tabs-interfaces';
 
 export default class EditorTabs extends Component<IEditorTabs> {

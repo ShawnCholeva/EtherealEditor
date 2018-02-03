@@ -1,17 +1,16 @@
 import React, { Component } from 'react';
 import { Icon } from 'react-fa';
 
-import { FileDirectoryNode } from '../../../../shared/file-directory/file-directory-structure';
+import { FileDirectoryNode } from '../../../../shared/file-directory/file-directory-models';
 import FileExplorerItem from '../file-explorer-item';
-import IFolderItem from './folder-item-interfaces';
-import IFolderState from './folder-state';
+import { IFolderItem, IFolderState } from './folder-item-interfaces';
 import { FileStatus } from '../../../../shared/enums/file-status';
 
-import '../../file-explorer.less';
+import './folder-item.less';
 
 export default class FolderItem extends Component<IFolderItem, IFolderState> {
     sortedChildren: FileDirectoryNode[] = new Array();
-    explorerItemTextStyle = {
+    folderItemTextStyle = {
         'padding': `2px 0px 2px ${this.props.folder.directoryLevel * 10}px`
     };
 
@@ -25,7 +24,7 @@ export default class FolderItem extends Component<IFolderItem, IFolderState> {
 
     sortChildren() {
         if (this.props.folder.children !== null) {
-            this.sortedChildren = this.props.folder.children.sort((currentChildItem, nextChildItem): any => {
+            this.sortedChildren = this.props.folder.children.sort((currentChildItem: FileDirectoryNode, nextChildItem: FileDirectoryNode): number => {
                 let child1 = currentChildItem.isDirectory;
                 let child2 = nextChildItem.isDirectory;
 
@@ -51,6 +50,7 @@ export default class FolderItem extends Component<IFolderItem, IFolderState> {
         }
     }
 
+    // TODO: Why do we need any here but not on the other components?
     render(): any {
         this.sortChildren();
 
@@ -65,7 +65,7 @@ export default class FolderItem extends Component<IFolderItem, IFolderState> {
         return (
             <div>
                 <div className={'explorer-item ' + (this.props.isRoot ? 'root-folder' : '')} onClick={() => this.openFolder()}>
-                    <span style={this.explorerItemTextStyle}><span className='explorer-item-icon'>{folderIcon}</span>{this.props.folder.fileName}</span>
+                    <span style={this.folderItemTextStyle}><span className='explorer-item-icon'>{folderIcon}</span>{this.props.folder.fileName}</span>
                 </div>
                 {this.state.isOpen && this.props.folder.children !== null &&
                     this.sortedChildren.map((item, index) => {

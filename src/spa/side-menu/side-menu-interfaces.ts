@@ -1,10 +1,10 @@
-import { FileDirectoryTree } from '../shared/file-directory/file-directory-structure';
+import { FileDirectoryTree } from '../shared/file-directory/file-directory-models';
 import { FileExplorerReducerState } from '../shared/file-directory/file-directory-reducer-models';
 
 export interface ISideMenu {
     fileExplorerInfo: FileExplorerReducerState | null;
 }
 
-export interface ISideMenuReduxState {
-    fileExplorer: FileDirectoryTree | null;
+export interface ISideMenuReduxProps {
+    fileExplorerInfo: FileExplorerReducerState | null;
 }

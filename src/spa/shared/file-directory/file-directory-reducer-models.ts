@@ -1,4 +1,4 @@
-import { FileDirectoryNode, FileDirectoryTree } from '../file-directory/file-directory-structure';
+import { FileDirectoryNode, FileDirectoryTree } from '../file-directory/file-directory-models';
 
 export class FileExplorerReducerState {
     fileExplorerDirectory: FileDirectoryTree | null;
@@ -10,4 +10,9 @@ export class FileExplorerReducerState {
 export class FileExplorerReducerAction {
     type: string;
     payload: FileDirectoryNode;
+}
+
+export class FileExplorerReducerCloseFileResponse {
+    filteredOpenFiles: FileDirectoryNode[];
+    nextSelectedFile: FileDirectoryNode | null;
 }

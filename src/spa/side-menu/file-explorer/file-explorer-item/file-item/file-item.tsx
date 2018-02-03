@@ -3,14 +3,13 @@ import { bindActionCreators, Dispatch } from 'redux';
 import { connect } from 'react-redux';
 import { Icon } from 'react-fa';
 
-import { FileDirectoryNode } from '../../../../shared/file-directory/file-directory-structure';
+import { FileDirectoryNode } from '../../../../shared/file-directory/file-directory-models';
 import { selectFile, openFile } from '../../../../shared/file-directory/file-directory-actions';
 import { FileStatus } from '../../../../shared/enums/file-status';
 import { IReduxState } from '../../../../shared/interfaces/redux-state';
-import { IFileExplorerReducer } from '../../filer-explorer-reducer-interface';
-import { IFileItemDispatchProps, IFileItemProps, IFilePassedProps } from './file-item-interfaces';
+import { IFileItemDispatchProps, IFileItemProps, IFilePassedProps, IFileExplorerReducer } from './file-item-interfaces';
 
-import '../../file-explorer.less';
+import './file-item.less';
 
 class FileItem extends Component<IFileItemProps & IFileItemDispatchProps> {
     explorerItemTextStyle = {
@@ -36,7 +35,8 @@ class FileItem extends Component<IFileItemProps & IFileItemDispatchProps> {
         return (
             <div onDoubleClick={() => this.openFile()}
                  onClick={() => this.selectFile()}
-                 className={'explorer-item ' + (this.props.fileExplorerInfo.selectedFile !== null && this.props.file.path === this.props.fileExplorerInfo.selectedFile.path ? 'selected-file' : '')}>
+                 className={'explorer-item ' + (this.props.fileExplorerInfo.selectedFile !== null &&
+                                                this.props.file.path === this.props.fileExplorerInfo.selectedFile.path ? 'selected-file' : '')}>
                 <span style={this.explorerItemTextStyle}><span className='explorer-item-icon'><Icon name='file' /></span>{this.props.file.fileName}</span>
             </div>
         );

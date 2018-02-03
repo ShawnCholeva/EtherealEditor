@@ -1,5 +1,5 @@
 import { FOLDER_LOADED, FILE_SELECTED, OPENED_FILE, CLOSED_FILE } from '../actions/action-types';
-import { FileDirectoryNode } from '../file-directory/file-directory-structure';
+import { FileDirectoryNode } from '../file-directory/file-directory-models';
 import { FileExplorerReducerState } from '../file-directory/file-directory-reducer-models';
 import fileExplorerReducerService from '../file-directory/file-directory-reducer-service';
 
@@ -10,6 +10,7 @@ const initialState: FileExplorerReducerState = {
     selectedFile: new FileDirectoryNode()
 };
 
+// TODO: Find out how to type these parameters and still work loading into combineReducers.
 export default (state: any = initialState, action: any) => {
     switch (action.type) {
     case FOLDER_LOADED:

@@ -4,11 +4,12 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 import FileExplorer from '../side-menu/file-explorer/file-explorer';
-import { ISideMenuReduxState, ISideMenu } from './side-menu-interfaces';
+import { ISideMenu, ISideMenuReduxProps } from './side-menu-interfaces';
 import { FileExplorerReducerState } from '../shared/file-directory/file-directory-reducer-models';
-import { FileDirectoryTree } from '../shared/file-directory/file-directory-structure';
+import { FileDirectoryTree } from '../shared/file-directory/file-directory-models';
+import { IReduxState } from '../shared/interfaces/redux-state';
 
-class SideMenu extends Component<ISideMenu, {}> {
+class SideMenu extends Component<ISideMenu> {
     render() {
         return (
             <div>
@@ -20,10 +21,10 @@ class SideMenu extends Component<ISideMenu, {}> {
     }
 }
 
-const mapStateToProps = (state: any) => {
+const mapStateToProps = (state: IReduxState): ISideMenuReduxProps => {
     return {
         fileExplorerInfo: state.fileExplorer
     };
 };
 
-export default connect<ISideMenu, null, null, any>(mapStateToProps)(SideMenu);
+export default connect<ISideMenuReduxProps, null, null, IReduxState>(mapStateToProps)(SideMenu);

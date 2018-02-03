@@ -1,4 +1,4 @@
-import { FileDirectoryNode } from '../file-directory/file-directory-structure';
+import { FileDirectoryNode } from '../file-directory/file-directory-models';
 import { FileExplorerReducerState, FileExplorerReducerAction } from '../file-directory/file-directory-reducer-models';
 import { FileStatus } from '../enums/file-status';
 
