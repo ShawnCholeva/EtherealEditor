@@ -1,5 +1,5 @@
 import { FileDirectoryNode } from '../file-directory/file-directory-models';
-import { FileExplorerReducerState, FileExplorerReducerAction } from '../file-directory/file-directory-reducer-models';
+import { FileExplorerReducerState, FileExplorerReducerAction, FileExplorerReducerCloseFileResponse } from '../file-directory/file-directory-reducer-models';
 import { FileStatus } from '../enums/file-status';
 
 class FileExplorerReducerService {
@@ -33,7 +33,7 @@ class FileExplorerReducerService {
         return state;
     }
 
-    closeFile(state: FileExplorerReducerState, action: FileExplorerReducerAction): any {
+    closeFile(state: FileExplorerReducerState, action: FileExplorerReducerAction): FileExplorerReducerCloseFileResponse {
         let indexOfFileToRemove = state.openFiles.indexOf(action.payload);
         let nextSelectedFile = null;
 
