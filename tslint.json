@@ -8,6 +8,9 @@
       "no-console": true,
       "no-empty": true,
       "no-invalid-this": true,
+      "triple-equals": true,
+      "no-duplicate-imports": true,
+      "prefer-const": true,
       "space-before-function-paren": ["error", {
         "anonymous": "always",
         "named": "never",

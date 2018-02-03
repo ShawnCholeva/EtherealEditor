@@ -5,18 +5,18 @@ import { LOAD_FOLDER_DISPATCH_EVENT } from '../constants/dispatch-event-types';
 
 class MenuService {
     populateFileExplorerDirectory(): void {
-        let browserWindow = BrowserWindow.getFocusedWindow();
+        const browserWindow = BrowserWindow.getFocusedWindow();
 
         dialog.showOpenDialog(browserWindow, {
             properties: ['openDirectory']
         }, (fileNames: string[] | undefined) => {
             if (fileNames !== undefined) {
-                let fileDirectoryTree = fileExplorerService.buildFileExplorerDirectory(fileNames[0]);
+                const fileDirectoryTree = fileExplorerService.buildFileExplorerDirectory(fileNames[0]);
                 browserWindow.webContents.send(LOAD_FOLDER_DISPATCH_EVENT, fileDirectoryTree);
             }
         });
     }
 }
 
-let menuService = new MenuService();
+const menuService = new MenuService();
 export default menuService;

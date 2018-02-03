@@ -5,9 +5,9 @@ import { FileStatus } from '../../spa/shared/enums/file-status';
 
 class FileExplorerService {
     public buildFileExplorerDirectory(directoryPath: string): FileDirectoryTree {
-        let explorerDirectory: FileDirectoryTree = new FileDirectoryTree();
+        const explorerDirectory: FileDirectoryTree = new FileDirectoryTree();
 
-        let rootNode = this.getRootNode(directoryPath);
+        const rootNode = this.getRootNode(directoryPath);
 
         explorerDirectory.nodes.push(rootNode);
 
@@ -15,8 +15,8 @@ class FileExplorerService {
     }
 
     private getRootNode(directoryPath: string): FileDirectoryNode {
-        let rootNode = new FileDirectoryNode();
-        let rootDirectory = this.getLastDirectoryInFilePath(directoryPath);
+        const rootNode = new FileDirectoryNode();
+        const rootDirectory = this.getLastDirectoryInFilePath(directoryPath);
 
         rootNode.isRootDirectory = true;
         rootNode.fileName = rootDirectory;
@@ -31,21 +31,21 @@ class FileExplorerService {
     }
 
     private getLastDirectoryInFilePath(filePath: string): string {
-        let directoryPathPieces = filePath.split('\\');
-        let lastDirectory = directoryPathPieces[directoryPathPieces.length - 1];
+        const directoryPathPieces = filePath.split('\\');
+        const lastDirectory = directoryPathPieces[directoryPathPieces.length - 1];
 
         return lastDirectory;
     }
 
     private getChildrenFilesInDirectory(directoryLevel: number, directoryPath: string): FileDirectoryNode[] {
-        let children: FileDirectoryNode[] = new Array();
+        const children: FileDirectoryNode[] = new Array();
 
-        let files = fs.readdirSync(directoryPath);
+        const files = fs.readdirSync(directoryPath);
 
         files.forEach(file => {
-            let fileDirectoryPath = `${directoryPath}\\${file}`;
+            const fileDirectoryPath = `${directoryPath}\\${file}`;
 
-            let childNode = new FileDirectoryNode();
+            const childNode = new FileDirectoryNode();
             childNode.directoryLevel = directoryLevel + 1;
             childNode.fileName = file;
             childNode.isRootDirectory = false;
@@ -53,7 +53,7 @@ class FileExplorerService {
             childNode.path = fileDirectoryPath;
 
             if (fs.lstatSync(fileDirectoryPath).isDirectory()) {
-                let directoryChildren = this.getChildrenFilesInDirectory(childNode.directoryLevel, fileDirectoryPath);
+                const directoryChildren = this.getChildrenFilesInDirectory(childNode.directoryLevel, fileDirectoryPath);
 
                 childNode.extension = null;
                 childNode.isDirectory = true;
@@ -61,8 +61,8 @@ class FileExplorerService {
 
                 children.push(childNode);
             } else {
-                let fileTypePieces = file.split('.');
-                let extension = fileTypePieces[fileTypePieces.length - 1];
+                const fileTypePieces = file.split('.');
+                const extension = fileTypePieces[fileTypePieces.length - 1];
 
                 childNode.extension = extension;
                 childNode.isDirectory = false;
@@ -76,5 +76,5 @@ class FileExplorerService {
     }
 }
 
-let fileExplorerService = new FileExplorerService();
+const fileExplorerService = new FileExplorerService();
 export default fileExplorerService;

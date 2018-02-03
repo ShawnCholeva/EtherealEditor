@@ -7,12 +7,12 @@ class FileDirectoryReducerService {
         if (state.openFiles.length > 0) {
             if (!state.openFiles.includes(action.payload)) {
                 if (action.payload.status === FileStatus.Selected) {
-                    let selectedFile = state.openFiles.find((file: FileDirectoryNode) => {
+                    const selectedFile = state.openFiles.find((file: FileDirectoryNode) => {
                         return file.status === FileStatus.Selected;
                     });
 
                     if (selectedFile === undefined) {
-                        let indexOfLastSelectedFile = state.openFiles.indexOf(state.lastSelectedFile);
+                        const indexOfLastSelectedFile = state.openFiles.indexOf(state.lastSelectedFile);
 
                         if (indexOfLastSelectedFile > -1) {
                             state.openFiles.splice(state.openFiles.indexOf(state.lastSelectedFile) + 1, 0, action.payload);
@@ -34,10 +34,10 @@ class FileDirectoryReducerService {
     }
 
     closeFile(state: FileDirectoryReducerState, action: FileDirectoryReducerAction): FileDirectoryReducerCloseFileResponse {
-        let indexOfFileToRemove = state.openFiles.indexOf(action.payload);
+        const indexOfFileToRemove = state.openFiles.indexOf(action.payload);
         let nextSelectedFile = null;
 
-        let filteredOpenFiles = state.openFiles.filter((file: FileDirectoryNode) => {
+        const filteredOpenFiles = state.openFiles.filter((file: FileDirectoryNode) => {
             return file.path !== action.payload.path;
         });
 
@@ -57,5 +57,5 @@ class FileDirectoryReducerService {
     }
 }
 
-let fileDirectoryReducerService = new FileDirectoryReducerService();
+const fileDirectoryReducerService = new FileDirectoryReducerService();
 export default fileDirectoryReducerService;

@@ -16,13 +16,13 @@ export default (state: any = initialState, action: any) => {
     case FOLDER_LOADED:
         return { ...state, fileExplorerDirectory: action.payload };
     case FILE_SELECTED:
-        let lastSelectedFile = state.selectedFile;
+        const lastSelectedFile = state.selectedFile;
         return { ...state, selectedFile: action.payload, lastSelectedFile: lastSelectedFile };
     case OPENED_FILE:
-        let openFileResponse = fileExplorerReducerService.openFile(state, action);
+        const openFileResponse = fileExplorerReducerService.openFile(state, action);
         return { ...state, openFiles: openFileResponse.openFiles };
     case CLOSED_FILE:
-        let closeFileResponse = fileExplorerReducerService.closeFile(state,action);
+        const closeFileResponse = fileExplorerReducerService.closeFile(state,action);
         return { ...state, openFiles: closeFileResponse.filteredOpenFiles, selectedFile: closeFileResponse.nextSelectedFile };
     default:
         return state;
