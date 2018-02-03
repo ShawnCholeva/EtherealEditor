@@ -5,6 +5,7 @@
     padding-top: 10px;
     user-select: none;
     cursor: default;
+    white-space: nowrap;
 }
 
 .file-explorer-wrapper {
@@ -14,6 +15,20 @@
 .file-explorer-content {
     height: 100%;
     overflow-y: auto;
+    white-space: nowrap;
+	background:
+		/* Shadow covers */
+		linear-gradient(#232A2D 30%, rgba(255,255,255,0)),
+		linear-gradient(rgba(255,255,255,0), #232A2D 70%) 0 100%,
+		
+		/* Shadows */
+		radial-gradient(farthest-side at 50% 0, rgba(0,0,0,.2), rgba(0,0,0,0)),
+		radial-gradient(farthest-side at 50% 100%, rgba(0,0,0,.2), rgba(0,0,0,0)) 0 100%;
+	background-repeat: no-repeat;
+	background-size: 100% 40px, 100% 40px, 100% 14px, 100% 14px;
+	
+	/* Opera doesn't support this in the shorthand */
+	background-attachment: local, local, scroll, scroll;
 }
 
 .file-explorer-content::-webkit-scrollbar {     
