@@ -5,11 +5,31 @@ import { connect } from 'react-redux';
 import { IEditorFile, IEditorFilePassedProps, IEditorFileReduxProps } from './editor-file-interfaces';
 import { IReduxState } from '../../shared/interfaces/redux-state';
 
-class EditorFile extends Component<IEditorFile> {
+import './editor-file.less';
+
+class EditorFile extends Component<IEditorFile, any> {
+    constructor(props: IEditorFile) {
+        super(props);
+
+        this.state = {
+            fileContent: this.props.file.content
+        };
+    }
+
+    componentWillReceiveProps(nextProps: any) {
+        if (typeof nextProps.file !== undefined) {
+            this.setState({ fileContent: nextProps.file.content });
+        }
+    }
+
     render() {
         return (
             <div>
-                <span>File</span>
+                <div className='file-content-container'>
+                    <form id='file-content-form'>
+                        <textarea value={ this.state.fileContent } onChange={e => this.setState({ fileContent : e.target.value })}/>
+                    </form>
+                </div>
             </div>
         );
     }

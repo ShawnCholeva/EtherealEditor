@@ -1,9 +1,14 @@
 import { FileDirectoryNode } from '../file-directory/file-directory-models';
 import { FileDirectoryReducerState, FileDirectoryReducerAction, FileDirectoryReducerCloseFileResponse } from '../file-directory/file-directory-reducer-models';
 import { FileStatus } from '../enums/file-status';
+import fileDirectoryService from './file-directory-service';
 
 class FileDirectoryReducerService {
-    openFile(state: FileDirectoryReducerState, action: FileDirectoryReducerAction): FileDirectoryReducerState {
+    public openFile(state: FileDirectoryReducerState, action: FileDirectoryReducerAction): FileDirectoryReducerState {
+        if (action.payload.content === '') {
+            action.payload.content = fileDirectoryService.getFileContent(action.payload.path);
+        }
+
         if (state.openFiles.length > 0) {
             if (!state.openFiles.includes(action.payload)) {
                 if (action.payload.status === FileStatus.Selected) {
@@ -33,7 +38,7 @@ class FileDirectoryReducerService {
         return state;
     }
 
-    closeFile(state: FileDirectoryReducerState, action: FileDirectoryReducerAction): FileDirectoryReducerCloseFileResponse {
+    public closeFile(state: FileDirectoryReducerState, action: FileDirectoryReducerAction): FileDirectoryReducerCloseFileResponse {
         const indexOfFileToRemove = state.openFiles.indexOf(action.payload);
         let nextSelectedFile = null;
 

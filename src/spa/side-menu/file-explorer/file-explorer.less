@@ -15,6 +15,7 @@
 .file-explorer-content {
     height: 100%;
     overflow-y: auto;
+    overflow-x: hidden;
     white-space: nowrap;
 	background:
 		/* Shadow covers */
@@ -26,8 +27,6 @@
 		radial-gradient(farthest-side at 50% 100%, rgba(0,0,0,.2), rgba(0,0,0,0)) 0 100%;
 	background-repeat: no-repeat;
 	background-size: 100% 40px, 100% 40px, 100% 14px, 100% 14px;
-	
-	/* Opera doesn't support this in the shorthand */
 	background-attachment: local, local, scroll, scroll;
 }
 

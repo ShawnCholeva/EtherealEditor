@@ -13,4 +13,5 @@ export class FileDirectoryNode {
     public isRootDirectory: boolean = false;
     public directoryLevel: number = 0;
     public status: FileStatus | null = null;
+    public content: string = '';
 }
