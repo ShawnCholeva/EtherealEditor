@@ -1,5 +1,6 @@
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
+const CopyWebpackPlugin = require('copy-webpack-plugin')
 
 const commonConfig = {
   output: {
@@ -62,7 +63,15 @@ const commonConfig = {
   node: {
     __dirname: false
   },
-  watch: true
+  watch: true,
+  plugins: [
+    new CopyWebpackPlugin([
+      {
+        from: 'node_modules/monaco-editor/min/vs',
+        to: 'vs',
+      }
+    ])
+  ]
 }
 
 module.exports = [
