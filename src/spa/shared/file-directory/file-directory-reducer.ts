@@ -14,6 +14,7 @@ const initialState: FileDirectoryReducerState = {
 export default (state: any = initialState, action: any) => {
     switch (action.type) {
     case FOLDER_LOADED:
+        state = initialState;
         return { ...state, fileExplorerDirectory: action.payload };
     case FILE_SELECTED:
         const lastSelectedFile = state.selectedFile;
